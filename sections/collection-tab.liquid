@@ -1,0 +1,84 @@
+<div class="collection-tabs-wrapper">
+  <div class="tabs-nav">
+    {% assign tab_collections = section.settings.collections | split: '|' %}
+    {% for collection_handle in tab_collections %}
+      {% assign collection = collections[collection_handle] %}
+      <button class="tab-button {% if forloop.first %}active{% endif %}" data-tab="{{ collection_handle }}">
+        {{ collection.title }}
+      </button>
+    {% endfor %}
+  </div>
+
+  <div class="tabs-content">
+    {% for collection_handle in tab_collections %}
+      {% assign collection = collections[collection_handle] %}
+      <div class="tab-panel {% if forloop.first %}active{% endif %}" data-tab-content="{{ collection_handle }}">
+        <div class="collection-grid">
+          {% for product in collection.products limit: section.settings.products_per_tab %}
+            {% render 'product-card', product: product %}  <!-- Reuse Prestige's product card -->
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .collection-tabs-wrapper { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .tabs-nav { display: flex; justify-content: center; border-bottom: 2px solid #e0e0e0; margin-bottom: 30px; }
+  .tab-button { background: none; border: none; padding: 15px 30px; font-size: 16px; cursor: pointer; color: #333; }
+  .tab-button.active { border-bottom: 2px solid #000; color: #000; font-weight: bold; }
+  .tabs-content { display: none; }
+  .tab-panel.active { display: block; }
+  .collection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  @media (max-width: 768px) { .tabs-nav { flex-wrap: wrap; } .tab-button { padding: 10px 15px; font-size: 14px; } }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.tab-button');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.dataset.tab;
+
+        // Update active button
+        buttons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        // Show/hide panels
+        panels.forEach(panel => {
+          panel.classList.remove('active');
+          if (panel.dataset.tabContent === targetTab) {
+            panel.classList.add('active');
+          }
+        });
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection Tabs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "collections",
+      "label": "Collection Handles (pipe-separated, e.g., women|men|kids)",
+      "default": "women|men|kids"
+    },
+    {
+      "type": "range",
+      "id": "products_per_tab",
+      "label": "Products per Tab",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "presets": [{ "name": "Collection Tabs" }]
+}
+{% endschema %}

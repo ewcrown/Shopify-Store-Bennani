@@ -1,0 +1,137 @@
+<style>
+.breadcrumbs {
+  background-color: {{ settings.breadcrumb_bg_color }};
+  padding-top: {{ settings.padding_top }}px;
+  padding-bottom: {{ settings.padding_bottom }}px;
+  padding-inline-start: var(--container-gutter);
+  padding-inline-end: var(--container-gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 61.69px; /* Ensure it sticks just below the header */
+  z-index: 3; /* Set higher z-index to keep it on top */
+  width: 100%;
+  border-bottom: 1px solid #e3e2de;
+  text-transform: uppercase;
+  height: 61.69px; /* Set breadcrumb height to match header */
+  grid-area: breadcrumbs;
+}
+
+/* Breadcrumbs List Styles */
+.breadcrumbs__list {
+  list-style-type: none;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Breadcrumb Item Styles */
+.breadcrumbs__item {
+  display: inline-block;
+}
+
+.breadcrumbs__item:not(:last-child):after {
+  display: inline-block;
+  content: '\00bb';
+  margin: 0 .6em;
+  color: #D2C489;
+  opacity: 100%;
+  font-size: var(--text-h6);
+}
+
+/* Breadcrumb Link Styles */
+.breadcrumbs__link {
+  text-decoration: none;
+  color: {{ settings.breadcrumb_text_color }};
+  font-size: var(--text-h6);
+}
+
+.breadcrumbs__link:hover {
+  text-decoration: none;
+}
+
+.breadcrumbs__link[aria-current="page"] {
+  color: #031f38 !important;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.breadcrumbs__link[aria-current="page"]:hover,
+.breadcrumbs__link[aria-current="page"]:focus {
+  text-decoration: none;
+}
+
+.breadcrumbs__item:last-child:after {
+  content: '';
+}
+
+.disabled-breadcrumb {
+  color: #999 !important;
+  pointer-events: none !important;
+  text-decoration: none !important;
+}
+
+.product-counter {
+  font-size: var(--text-h6);
+  margin-left: auto;
+  color: {{ settings.breadcrumb_text_color }};
+}
+
+</style>
+
+{% unless template == 'index' or template == 'cart' or template == '404' %}
+  {% assign t = template | split: '.' | first %}
+
+  <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="/">Home</a>
+      </li>
+
+      {% case t %}
+        {% when 'product' %}
+          <!-- Product Page Breadcrumbs -->
+          {% if product.collections.size > 0 %}
+            <!-- If the product is part of a collection, show the collection -->
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="/collections">Collections</a>
+            </li>
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+            </li>
+          {% endif %}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+          </li>
+
+        {% when 'collection' %}
+          <!-- Collection Page Breadcrumbs -->
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="/collections">Collections</a>
+          </li>
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+          </li>
+
+        {% when 'page' %}
+          <!-- Static Page Breadcrumbs -->
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+          </li>
+
+      {%- else -%}
+        <li class="breadcrumbs__item">
+          <a class="breadcrumbs__link disabled-breadcrumb" href="{{ request.path }}" aria-current="page">
+            {{- page_title -}}
+          </a>
+        </li>
+      {% endcase %}
+    </ol>
+
+    {% if collection %}
+      <span class="product-counter">{{ collection.products_count }} Products</span>
+    {% endif %}
+  </nav>
+{% endunless %}
+

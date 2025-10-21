@@ -1,0 +1,142 @@
+{% schema %}
+{
+  "name": "Giving Movement",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "select",
+          "id": "tab",
+          "label": "Tab for this row",
+          "default": "men",
+          "options": [
+            { "value": "men", "label": "Men" },
+            { "value": "women", "label": "Women" },
+            { "value": "accessories", "label": "Accessories" }
+          ]
+        },
+        {
+          "type": "number",
+          "id": "columns",
+          "label": "Number of images in this row (1 or 2)",
+          "default": 1
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "text",
+          "id": "button_text_1",
+          "label": "Button Text 1",
+          "default": "Click Me"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "Button Link 1"
+        },
+        {
+          "type": "richtext",
+          "id": "text_1",
+          "label": "Text 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2 (optional)"
+        },
+        {
+          "type": "text",
+          "id": "button_text_2",
+          "label": "Button Text 2",
+          "default": "Click Me"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Button Link 2"
+        },
+        {
+          "type": "richtext",
+          "id": "text_2",
+          "label": "Text 2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Giving Movement Tabs"
+    }
+  ]
+}
+{% endschema %}
+
+<!-- Tabs -->
+<div class="givingmovement-tabs flex justify-center gap-4 mb-6">
+  <button class="gm-tab px-6 py-3 bg-gray-200 font-bold uppercase" data-tab="men">Men</button>
+  <button class="gm-tab px-6 py-3 bg-gray-200 font-bold uppercase" data-tab="women">Women</button>
+  <button class="gm-tab px-6 py-3 bg-gray-200 font-bold uppercase" data-tab="accessories">Accessories</button>
+</div>
+
+<!-- Panels -->
+<div class="givingmovement-panels max-w-6xl mx-auto flex flex-col gap-10">
+  {% for block in section.blocks %}
+    <div class="gm-panel" data-tab="{{ block.settings.tab }}">
+      {% assign columns = block.settings.columns | default: 1 %}
+      <div class="row flex {% if columns == 1 %}justify-center{% else %}justify-around{% endif %} items-center w-full gap-8 p-6">
+
+        {% assign img1 = block.settings.image_1 | default: 'https://via.placeholder.com/600x800?text=Image+1' %}
+        <div class="flex flex-col items-center">
+          <img src="{{ img1 }}" alt="" class="object-cover rounded-md max-h-[70vh] w-auto">
+          {% if block.settings.text_1 %}<div class="mt-4 text-center">{{ block.settings.text_1 }}</div>{% endif %}
+          {% if block.settings.button_text_1 %}
+          <a href="{{ block.settings.button_link_1 }}" class="mt-2 px-6 py-3 bg-black text-white uppercase">{{ block.settings.button_text_1 }}</a>
+          {% endif %}
+        </div>
+
+        {% if columns == 2 %}
+          {% assign img2 = block.settings.image_2 | default: 'https://via.placeholder.com/600x800?text=Image+2' %}
+          <div class="flex flex-col items-center">
+            <img src="{{ img2 }}" alt="" class="object-cover rounded-md max-h-[70vh] w-auto">
+            {% if block.settings.text_2 %}<div class="mt-4 text-center">{{ block.settings.text_2 }}</div>{% endif %}
+            {% if block.settings.button_text_2 %}
+            <a href="{{ block.settings.button_link_2 }}" class="mt-2 px-6 py-3 bg-black text-white uppercase">{{ block.settings.button_text_2 }}</a>
+            {% endif %}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+.gm-panel { display: none; }
+.gm-panel img { max-height: 70vh; object-fit: cover; }
+.tab-active { background-color: black !important; color: white !important; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.gm-tab');
+  const panels = document.querySelectorAll('.gm-panel');
+
+  function showTab(tabName) {
+    tabs.forEach(t => t.classList.toggle('tab-active', t.dataset.tab === tabName));
+    panels.forEach(p => p.style.display = (p.dataset.tab === tabName) ? 'block' : 'none');
+  }
+
+  // Initialize first tab
+  showTab('men');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => showTab(tab.dataset.tab));
+  });
+});
+</script>

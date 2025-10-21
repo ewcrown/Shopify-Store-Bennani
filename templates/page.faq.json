@@ -1,0 +1,147 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "category_CUExQz": {
+          "type": "category",
+          "settings": {
+            "title": "Shipping",
+            "icon": "picto-delivery-truck",
+            "icon_width": 16
+          }
+        },
+        "question-1": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship overseas?",
+            "answer": "<p>We currently ship only to the GCC and UK. We plan to accommodate more customers in the future by expanding our shipping destinations.</p>"
+          }
+        },
+        "question-2": {
+          "type": "question",
+          "settings": {
+            "question": "How long will it take to get my orders?",
+            "answer": "<p>It depends on where you are. Orders made in the UK will take 7-10 business days to arrive. GCC deliveries can take anywhere from 7-16 days. Delivery details will be provided in your confirmation email.</p>"
+          }
+        },
+        "question_XnVKiA": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer order tracking?",
+            "answer": "<p>At this time, we <strong>do not offer order tracking</strong>, but we aim to process and deliver your order as efficiently as possible.</p>"
+          }
+        },
+        "category_xXHjGV": {
+          "type": "category",
+          "settings": {
+            "title": "Customer Support",
+            "icon": "picto-customer-support",
+            "icon_width": 16
+          }
+        },
+        "question-3": {
+          "type": "question",
+          "settings": {
+            "question": "Where can I ask for help?",
+            "answer": "<p>You can contact us through our <a href=\"/pages/contact-us-page\" title=\"Contact Us page\"><em><strong>CONTACT US </strong></em> page.<em><strong>  </strong></em></a>We will be happy to assist you.</p>"
+          }
+        },
+        "category_eFEJif": {
+          "type": "category",
+          "settings": {
+            "title": "About Us",
+            "icon": "picto-happy-face",
+            "icon_width": 16
+          }
+        },
+        "question_mBMeAW": {
+          "type": "question",
+          "settings": {
+            "question": "Is Bennani a Muslim brand?",
+            "answer": "<p>Bennani is <strong>inspired by discipline, excellence, and transformation</strong> — values deeply rooted in Islam — but it’s a brand for <strong>everyone</strong> who resonates with the pursuit of inner and outer strength. Our message is:<br/><br/><strong>\"All that is unhealthy is ugly. All that is healthy is beautiful.\"</strong></p>"
+          }
+        },
+        "question_UEh84f": {
+          "type": "question",
+          "settings": {
+            "question": "Is Bennani gender specific?",
+            "answer": "<p>Yes — <strong>at the moment, Bennani is designed for men</strong>.</p><p>We started by creating clothing based on our own experiences and what we personally needed in our journey of transformation. That’s why everything we offer right now is made with men in mind.</p><p>We do plan to launch a <strong>women’s line in the future</strong>, but we want to do it properly — with the same care, purpose, and authenticity. Until then, we're focused on perfecting what we know best.</p>"
+          }
+        },
+        "category_G7e8H7": {
+          "type": "category",
+          "settings": {
+            "title": "General Info",
+            "icon": "picto-info",
+            "icon_width": 16
+          }
+        },
+        "question_7jn9ee": {
+          "type": "question",
+          "settings": {
+            "question": "Are your clothes for working out or everyday wear?",
+            "answer": "<p>Both.<br/><br/>Our Atlas collection is built for training — tested under real-world stress. Different Atlas items are for different activities. <br/><br/>Our Bennani Comfort collection is made for minimalist and as the name suggests, comfort wear.<br/><br/>Future Orange-Room collection will be made for streetwear to be worn every day and casual occasions. </p><p>We will keep updating all our collections to include more overtime. </p>"
+          }
+        },
+        "question_TpUY3p": {
+          "type": "question",
+          "settings": {
+            "question": "What sizes do you offer?",
+            "answer": "<p>We aim to serve everyones <strong>body</strong> with appropriate sizes. Our sizing ranges from X<strong>S to 3XL, </strong>but keep in mind that not all the items will have all those sizes. Our sizing is based purely on the European metric measurements.</p>"
+          }
+        },
+        "question_66mJyq": {
+          "type": "question",
+          "settings": {
+            "question": "Will there be restocks?",
+            "answer": "<p>For most of the items, there will be restocks as part of our 'Armoury'. Items that will not be restocked will be specified as Limited Edition items. </p>"
+          }
+        },
+        "question_yLDnre": {
+          "type": "question",
+          "settings": {
+            "question": "Can I model or represent Bennani?",
+            "answer": "<p>We do not engage in typical “influencer deals.”<br/><br/>We look for <strong>real transformations</strong>, not followers. If your life reflects our message, we might feature you. Tag @bennani.co on your Instagram or email us your story.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_CUExQz",
+        "question-1",
+        "question-2",
+        "question_XnVKiA",
+        "category_xXHjGV",
+        "question-3",
+        "category_eFEJif",
+        "question_mBMeAW",
+        "question_UEh84f",
+        "category_G7e8H7",
+        "question_7jn9ee",
+        "question_TpUY3p",
+        "question_66mJyq",
+        "question_yLDnre"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "show_categories": false,
+        "subheading": "Need help?",
+        "title": "Frequently Asked Questions",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "faq"
+  ]
+}

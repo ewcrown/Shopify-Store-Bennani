@@ -1,0 +1,243 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor_ifhcak": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h1"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": true
+          }
+        },
+        "description_cpixCg": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false,
+            "show_below_gallery": false
+          }
+        },
+        "separator_yXBfQq": {
+          "type": "separator",
+          "settings": {}
+        },
+        "product_variations_gDDzMP": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "Colour",
+            "option_value_metafield": "",
+            "products": [
+              "holo-flower-c-copy-copy-copy-copy-copy-copy-copy",
+              "holo-flower-c-copy-copy-copy-copy-copy-copy-copy-copy"
+            ],
+            "selector_style": "variant_image"
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "quantity_selector_gwLF8b": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "variant_image_options": "Color",
+            "size_chart_page": ""
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": false,
+            "atc_button_background": "#031f38",
+            "atc_button_text_color": "#ffffff",
+            "payment_button_background": "#031f38",
+            "payment_button_text_color": "#ffffff"
+          }
+        },
+        "accordion_WH3krF": {
+          "type": "accordion",
+          "settings": {
+            "show_below_gallery": false,
+            "icon": "none",
+            "title": "Detail",
+            "content": "<p></p>{{ product.description }}",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "accordion_jJ87Ct": {
+          "type": "accordion",
+          "settings": {
+            "show_below_gallery": false,
+            "icon": "none",
+            "title": "Model",
+            "content": "<p></p>{{ product.description }}",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "modal_8kbnRC": {
+          "type": "modal",
+          "disabled": true,
+          "settings": {
+            "button_title": "<strong>DESCRIPTION    /    DETAIL    /    MODEL</strong>",
+            "button_style": "solid",
+            "stretch_button": true,
+            "button_background": "#ffffff",
+            "button_text_color": "#031f38",
+            "modal_title": "Product Description",
+            "modal_content": "<p>Lol</p>{{ product.description }}<p></p>"
+          }
+        }
+      },
+      "block_order": [
+        "vendor_ifhcak",
+        "title",
+        "price",
+        "description_cpixCg",
+        "separator_yXBfQq",
+        "product_variations_gDDzMP",
+        "payment_terms",
+        "quantity_selector_gwLF8b",
+        "variant_picker",
+        "buy_buttons",
+        "accordion_WH3krF",
+        "accordion_jJ87Ct",
+        "modal_8kbnRC"
+      ],
+      "custom_css": [
+        ".product {text-transform: uppercase;}",
+        ".product {position: sticky;}",
+        ".text-sm {font-size: var(--text-h6);}",
+        "legend {font-size: var(--text-h6);}",
+        "p {font-size: var(--text-h6);}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "container_size": "lg",
+        "product_info_size": 40,
+        "show_sticky_add_to_cart": false,
+        "center_basic_info": true,
+        "desktop_media_layout": "grid",
+        "desktop_media_grid_gap": 50,
+        "mobile_controls": "dots",
+        "enable_media_autoplay": false,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3
+      }
+    },
+    "style_with_63rUWb": {
+      "type": "style-with",
+      "disabled": true,
+      "name": "Style with",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "hide_product_information": false,
+        "stack_products": true,
+        "recommendations_count": 4,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "",
+        "title": "Style with",
+        "content": ""
+      }
+    },
+    "shop_the_look_xzU3PJ": {
+      "type": "shop-the-look",
+      "blocks": {
+        "look_iBMzYM": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/image_2025-07-14_212024336.png",
+            "hot_spots_background": "#ffffff",
+            "product_1": "co-y-copy",
+            "product_1_horizontal_position": 48,
+            "product_1_vertical_position": 35,
+            "product_2": "boxy-shorter-hood-copy-copy-copy-copy",
+            "product_2_horizontal_position": 34,
+            "product_2_vertical_position": 65,
+            "product_3": "relax-cuffless-sweatpants-copy",
+            "product_3_horizontal_position": 60,
+            "product_3_vertical_position": 95,
+            "product_4": "",
+            "product_4_horizontal_position": 85,
+            "product_4_vertical_position": 85
+          }
+        }
+      },
+      "block_order": [
+        "look_iBMzYM"
+      ],
+      "custom_css": [
+        "@media (max-width: 767px) {.v-stack.gap-6 {padding: 1rem !important; }}"
+      ],
+      "name": "t:sections.shop_the_look.presets.shop_the_look.name",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": false,
+        "subheading": "",
+        "title": "Shop the look",
+        "content": "",
+        "popover_title": "Shop the look"
+      }
+    },
+    "related_products_X39UkR": {
+      "type": "related-products",
+      "custom_css": [
+        "@media screen and (min-width: 769px) {.product-list {padding-top: 1.875rem; }}"
+      ],
+      "name": "t:sections.related_products.presets.related_products.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": true,
+        "recommendations_count": 4,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 5,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "",
+        "title": "You may also like",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "style_with_63rUWb",
+    "shop_the_look_xzU3PJ",
+    "related_products_X39UkR"
+  ]
+}

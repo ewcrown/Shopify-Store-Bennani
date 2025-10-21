@@ -1,0 +1,98 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_title": true,
+        "page_width": "sm"
+      }
+    },
+    "pagefly_section_byM8YW": {
+      "type": "pagefly-section",
+      "name": "PageFly Section",
+      "settings": {
+        "section_id": "pf-1b1c4598"
+      }
+    },
+    "timeline_tjdiTp": {
+      "type": "timeline",
+      "blocks": {
+        "item_abARzA": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/photo_2025-01-07_15-12-49.jpg",
+            "label": "2024 DEC",
+            "subheading": "The brand forms",
+            "title": "2024",
+            "content": "<p>Emil and Wael decided to form the brand that is Bennani, initially inspired by formal and comfortable wear and by the culture and art of Morocco, the Brand will go on to become a symbol of self-improvement and excellence. </p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "mobile_text_color": "#ffffff"
+          }
+        },
+        "item_XEnrNT": {
+          "type": "item",
+          "settings": {
+            "label": "2025 MAR",
+            "subheading": "The Website is 95% Done",
+            "title": "2025",
+            "content": "<p>The core website and the functions are complete, the other 5% being the add-ons, pages such as the World of Bennani and choosing the right font. Bar that, it was complete. </p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "mobile_text_color": "#ffffff"
+          }
+        },
+        "item_LNYCYW": {
+          "type": "item",
+          "settings": {
+            "label": "2025 May",
+            "subheading": "Our first prototype ever!",
+            "title": "2025",
+            "content": "<p>Wael gets to try on the first ever Bennani clothing, designed for the intention of Streetwear. The clothes have garnered attention from all sides, including random strangers complimenting it. </p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "mobile_text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "item_abARzA",
+        "item_XEnrNT",
+        "item_LNYCYW"
+      ],
+      "name": "t:sections.timeline.presets.timeline.name",
+      "settings": {
+        "color_scheme": "",
+        "item_color_scheme": "",
+        "separate_section_with_border": false
+      }
+    },
+    "pagefly_section_rgDp7x": {
+      "type": "pagefly-section",
+      "name": "PageFly Section",
+      "settings": {
+        "section_id": "pf-d5ee4998"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "pagefly_section_byM8YW",
+    "timeline_tjdiTp",
+    "pagefly_section_rgDp7x"
+  ]
+}

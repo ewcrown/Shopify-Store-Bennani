@@ -1,0 +1,94 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message_HNjqjN": {
+          "type": "message",
+          "settings": {
+            "text": "CURRENTLY SHIPPING ONLY TO THE UAE AND UK"
+          }
+        }
+      },
+      "block_order": [
+        "message_HNjqjN"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "enable_sticky": false,
+        "autoplay": false,
+        "cycle_speed": 5,
+        "desktop_font_size": 9,
+        "mobile_font_size": 9
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_menu_AF6e3n": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Shop",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_AF6e3n"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "a {text-transform: uppercase; font-size: var(--text-h6); font-family: var(--heading-font-family); font-style: var(--heading-font-style);}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "enable_sticky": true,
+        "hide_on_scroll": false,
+        "show_separation_border": false,
+        "reduce_padding": false,
+        "logo": "shopify://shop_images/Copy_of_BENNANI_NAME_OFFICIAL.png",
+        "logo_max_width": 90,
+        "logo_mobile_max_width": 90,
+        "menu": "testing-menu",
+        "sidebar_menu": "phone-menu",
+        "menu_open_trigger": "hover",
+        "menu_text_font": "heading",
+        "enable_search": true,
+        "sidebar_color_scheme": "scheme-3",
+        "sidebar_text_font": "heading",
+        "sidebar_show_dividers": false,
+        "sidebar_open_second_level_menus": false,
+        "layout": "logo_center_navigation_inline",
+        "show_icons": false,
+        "show_country_selector": false,
+        "show_country_name": false,
+        "show_country_flag": false,
+        "show_locale_selector": false,
+        "transparent_header_text_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

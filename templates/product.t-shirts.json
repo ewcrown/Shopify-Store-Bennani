@@ -1,0 +1,233 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h6"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "product_variations_dqWLhC": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "COLOUR",
+            "option_value_metafield": "",
+            "products": [
+              "as-colour-classic-tee-5026-untitled-design",
+              "as-colour-classic-tee-5026-untitled-design-1",
+              "as-colour-classic-tee-5026-untitled-design-2"
+            ],
+            "selector_style": "variant_image"
+          }
+        },
+        "product_variations_FAqQ7E": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "COLOUR",
+            "option_value_metafield": "",
+            "products": [
+              "stanley-stella-prepster-polo-2-0-untitled-design",
+              "stanley-stella-prepster-polo-2-0-untitled-design-1",
+              "stanley-stella-prepster-polo-2-0-untitled-design-2",
+              "stanley-stella-prepster-polo-2-0-untitled-design-3",
+              "stanley-stella-prepster-polo-2-0-untitled-design-4"
+            ],
+            "selector_style": "variant_image"
+          }
+        },
+        "product_variations_d46UGV": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "COLOUR",
+            "option_value_metafield": "",
+            "products": [
+              "gildan-heavy-cotton-t-shirt-japanesewave1-1",
+              "gildan-heavy-cotton-t-shirt-japanesewave1-2",
+              "gildan-heavy-cotton-t-shirt-japanesewave1",
+              "gildan-heavy-cotton-t-shirt-japanesewave1-3"
+            ],
+            "selector_style": "variant_image"
+          }
+        },
+        "product_variations_wUEEkB": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "COLOUR",
+            "option_value_metafield": "",
+            "products": [
+              "stanley-stella-slammer-2-0-simple-relax-crew",
+              "stanley-stella-slammer-2-0-sweater-zip",
+              "stanley-stella-slammer-2-0-sweater-zip-1"
+            ],
+            "selector_style": "variant_image"
+          }
+        },
+        "product_variations_xtjgQr": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "COLOUR",
+            "option_value_metafield": "",
+            "products": [
+              "stanley-stella-trucker-2-0-sweater-zip",
+              "stanley-stella-trucker-2-0-untitled-design-3"
+            ],
+            "selector_style": "variant_image"
+          }
+        },
+        "product_variations_yMH7dw": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "COLOUR",
+            "option_value_metafield": "",
+            "products": [
+              "stanley-stella-cruiser-2-0-space-fanta-1"
+            ],
+            "selector_style": "variant_image"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_style": "block",
+            "swatch_selector_style": "none",
+            "variant_image_options": "COLOUR",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": false,
+            "atc_button_background": "#d2c489",
+            "atc_button_text_color": "#031f38",
+            "payment_button_background": "rgba(0,0,0,0)",
+            "payment_button_text_color": ""
+          }
+        },
+        "complementary_products": {
+          "type": "complementary_products",
+          "settings": {
+            "title": "Pairs well with",
+            "products_count": 2,
+            "show_below_gallery": true,
+            "stack_products": false,
+            "show_quick_buy": true
+          }
+        },
+        "description_rNCiXA": {
+          "type": "description",
+          "settings": {
+            "collapse_content": true,
+            "show_below_gallery": false
+          }
+        },
+        "accordion_JRn3Dw": {
+          "type": "accordion",
+          "settings": {
+            "show_below_gallery": false,
+            "icon": "none",
+            "title": "Shipping and Returns",
+            "content": "<p>You wont get to return it, we are too jewish</p>",
+            "liquid": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "payment_terms",
+        "separator",
+        "product_variations_dqWLhC",
+        "product_variations_FAqQ7E",
+        "product_variations_d46UGV",
+        "product_variations_wUEEkB",
+        "product_variations_xtjgQr",
+        "product_variations_yMH7dw",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "complementary_products",
+        "description_rNCiXA",
+        "accordion_JRn3Dw"
+      ],
+      "custom_css": [
+        ".product {text-transform: uppercase;}",
+        ".product {position: sticky;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "container_size": "full",
+        "product_info_size": 40,
+        "show_sticky_add_to_cart": false,
+        "center_basic_info": true,
+        "desktop_media_layout": "grid",
+        "desktop_media_grid_gap": 50,
+        "mobile_controls": "dots",
+        "enable_media_autoplay": true,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": true,
+        "hide_product_information": false,
+        "stack_products": true,
+        "recommendations_count": 4,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 2,
+        "vertical_spacing_factor": 1,
+        "subheading": "",
+        "title": "Related products",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}

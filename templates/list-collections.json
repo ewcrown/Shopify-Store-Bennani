@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "disabled": true,
+      "custom_css": [
+        "img {height: 100vh; border-radius: 32px;}",
+        ".section-spacing {padding-top: 0 !important;}"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "show_title": false,
+        "collections": [
+          "comfortwear",
+          "atlas-performance"
+        ],
+        "collections_per_row_mobile": "1",
+        "collections_per_row_desktop": 1,
+        "image_size": "lg",
+        "content_position": "place-self-center text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

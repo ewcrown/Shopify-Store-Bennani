@@ -1,0 +1,47 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "pf-c29b9bef": {
+      "type": "pf-c29b9bef",
+      "settings": {}
+    },
+    "blog_posts_BeNBfB": {
+      "type": "blog-posts",
+      "custom_css": [],
+      "name": "t:sections.blog_posts.presets.blog_posts.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "blog": "latest-news",
+        "posts_count": 9,
+        "stack_on_mobile": false,
+        "show_category": true,
+        "show_date": true,
+        "show_excerpt": true,
+        "show_read_more": true,
+        "subheading": "",
+        "title": "Latest News",
+        "content": "",
+        "button_link": "",
+        "button_text": ""
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "pf-c29b9bef",
+    "blog_posts_BeNBfB"
+  ]
+}
