@@ -1,0 +1,243 @@
+{% if template.name != 'index' %}
+<section class="ew-scroll-links-section" data-theme="{{ section.settings.theme | default: 'light' }}">
+  <div class="container">
+    {% if section.settings.heading != blank %}
+      <h2 class="ew-scroll-links__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    
+    <div class="ew-scroll-links__wrapper">
+      <div class="ew-scroll-links__container">
+        {% for block in section.blocks %}
+          <a href="{{ block.settings.link | default: '#' }}" class="ew-scroll-links__item" {{ block.shopify_attributes }}>
+            {{ block.settings.text }}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ew-scroll-links-section {
+    font-family: 'Josefin Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+  .ew-scroll-links__heading {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: left;
+    margin: 0 0 30px 0;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.2;
+  }
+
+  .ew-scroll-links__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .ew-scroll-links__container {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 10px 20px;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: calc(3 * 200px + 2 * 30px); /* 3 items + 2 gaps */
+    margin: 0 auto;
+  }
+
+  .ew-scroll-links__container::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
+
+  .ew-scroll-links__item {
+    flex: 0 0 200px; /* Fixed width for exactly 3 items */
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  /* Light theme - dark text */
+  .ew-scroll-links__item {
+    color: #1a1a1a;
+  }
+
+  .ew-scroll-links__item:hover {
+    color: #666;
+    transform: translateY(-2px);
+  }
+
+  /* Dark theme - light text */
+  .ew-scroll-links-section[data-theme="dark"] .ew-scroll-links__item {
+    color: #fff;
+  }
+
+  .ew-scroll-links-section[data-theme="dark"] .ew-scroll-links__item:hover {
+    color: #ccc;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .ew-scroll-links-section {
+      padding: 50px 0;
+    }
+    
+    .ew-scroll-links__heading {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+    
+    .ew-scroll-links__container {
+      gap: 20px;
+      padding: 10px 15px;
+      max-width: calc(3 * 150px + 2 * 20px); /* 3 items + 2 gaps */
+    }
+    
+    .ew-scroll-links__item {
+      flex: 0 0 150px; /* Fixed width for 3 items on tablet */
+      padding: 8px 15px;
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .ew-scroll-links-section {
+      padding: 40px 0;
+    }
+    
+    .ew-scroll-links__heading {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .ew-scroll-links__container {
+      gap: 15px;
+      padding: 10px 10px;
+      max-width: calc(3 * 120px + 2 * 15px); /* 3 items + 2 gaps */
+    }
+    
+    .ew-scroll-links__item {
+      flex: 0 0 120px; /* Fixed width for 3 items on mobile */
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ew-scroll-links-section {
+      padding: 30px 0;
+    }
+    
+    .ew-scroll-links__heading {
+      font-size: 20px;
+    }
+    
+    .ew-scroll-links__item {
+      padding: 12px 15px;
+      font-size: 13px;
+    }
+  }
+</style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "EW Scroll Links",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Navigation Links"
+    },
+    {
+      "type": "select",
+      "id": "theme",
+      "label": "Button Theme",
+      "options": [
+        {
+          "value": "light",
+          "label": "Light Background (Dark Buttons)"
+        },
+        {
+          "value": "dark",
+          "label": "Dark Background (Light Buttons)"
+        }
+      ],
+      "default": "light",
+      "info": "Choose the theme based on your background color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "scroll_link",
+      "name": "Scroll Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Link Text",
+          "default": "LINK TEXT"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL",
+          "info": "URL for the link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EW Scroll Links",
+      "blocks": [
+        {
+          "type": "scroll_link",
+          "settings": {
+            "text": "INITILES",
+            "link": "#"
+          }
+        },
+        {
+          "type": "scroll_link",
+          "settings": {
+            "text": "MEMBERS CLUB",
+            "link": "#"
+          }
+        },
+        {
+          "type": "scroll_link",
+          "settings": {
+            "text": "ATLAS",
+            "link": "#"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
