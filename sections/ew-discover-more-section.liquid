@@ -9,6 +9,30 @@
       "default": "Discover More"
     },
     {
+      "type": "select",
+      "id": "button_scheme",
+      "label": "Button Color Scheme",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "Scheme 1"
+        },
+        {
+          "value": "scheme-2",
+          "label": "Scheme 2"
+        },
+        {
+          "value": "scheme-3",
+          "label": "Scheme 3"
+        },
+        {
+          "value": "scheme-4",
+          "label": "Scheme 4"
+        }
+      ],
+      "default": "scheme-4"
+    },
+    {
       "type": "text",
       "id": "ew_subtitle",
       "label": "Subtitle",
@@ -141,7 +165,7 @@
         {% assign link_setting = 'ew_block' | append: i | append: '_link' %}
         
         <a href="{{ section.settings[link_setting] }}" class="ew-block ew-block-{{ i }}" {% if section.settings[image_setting] %}style="background-image: url('{{ section.settings[image_setting] | img_url: '400x400' }}');"{% endif %}>
-          <div class="ew-block-button button" style="--button-background: 255 255 255;--button-outline-color: 255 255 255;--button-text-color: 0 0 0;">{{ section.settings[title_setting] }}</div>
+          <div class="ew-block-button button color-scheme--{{ section.settings.button_scheme | default: 'scheme-4' }}">{{ section.settings[title_setting] }}</div>
         </a>
       {% endfor %}
     </div>
@@ -243,33 +267,13 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.ew-block:hover .button {
-  background: #1a1a1a !important;
-  color: #fff !important;
-}
-
-
-/* Button Styles */
+/* Button Styles - Using theme's button system */
 .ew-block-button {
-  background: white;
-  color: #1a1a1a;
-  padding: 8px 40px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-  display: inline-block;
+  /* All styling handled by theme's button system */
   position: relative;
   z-index: 2;
-  transition: all 0.3s ease;
   width: max-content;
   margin: 0 auto;
-  font-family: 'Josefin Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-.ew-block:hover .ew-block-button {
-  background: #f0f0f0;
-  transform: translateY(-2px);
 }
 
 /* Responsive Design */

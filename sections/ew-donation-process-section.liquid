@@ -1,0 +1,326 @@
+<section class="ew-donation-process-section">
+  <div class="container">
+    {% if section.settings.heading != blank %}
+      <h2 class="ew-donation__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    
+    {% if section.settings.subheading != blank %}
+      <p class="ew-donation__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+    
+    <div class="ew-donation__steps">
+      {% for block in section.blocks %}
+        <div class="ew-donation__step" {{ block.shopify_attributes }}>
+          <div class="ew-donation__step-content">
+            {% if block.settings.heading != blank %}
+              <h3 class="ew-donation__step-heading">{{ block.settings.heading }}</h3>
+            {% endif %}
+            
+            {% if block.settings.description != blank %}
+              <p class="ew-donation__step-description">{{ block.settings.description }}</p>
+            {% endif %}
+          </div>
+          
+          {% if block.settings.image %}
+            <div class="ew-donation__step-image-wrapper">
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'ew-donation__step-image', width: 800, height: 600 }}
+            </div>
+          {% endif %}
+
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ew-donation-process-section {
+    padding: 100px 0;
+    background-color: #fff;
+    font-family: 'Josefin Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ew-donation__heading {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    margin: 0 0 10px 0;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: normal;
+}
+
+.ew-donation__subheading {
+  letter-spacing: 0;
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+  margin: 0 0 80px 0;
+  max-width: 476px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+  .ew-donation__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .ew-donation__step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+  }
+
+  .ew-donation__step:nth-child(even) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ew-donation__step:nth-child(even) .ew-donation__step-content {
+    order: 2;
+  }
+
+  .ew-donation__step:nth-child(even) .ew-donation__step-image-wrapper {
+    order: 1;
+  }
+
+  .ew-donation__step-heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 16px 0;
+    text-transform: none;
+    line-height: normal;
+}
+
+.ew-donation__step-description {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  margin: 0;
+  letter-spacing: 0;
+  font-style: italic;
+  max-width: 400px;
+}
+
+  .ew-donation__step-image-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .ew-donation__step-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .ew-donation-process-section {
+      padding: 80px 0;
+    }
+    
+    .ew-donation__heading {
+      font-size: 38px;
+    }
+    
+    .ew-donation__subheading {
+      margin-bottom: 60px;
+    }
+    
+    .ew-donation__steps {
+      gap: 50px;
+    }
+    
+    .ew-donation__step {
+      gap: 40px;
+    }
+    
+    .ew-donation__step:nth-child(even) {
+      grid-template-columns:1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .ew-donation-process-section {
+      padding: 60px 0;
+    }
+    
+    .ew-donation__heading {
+      font-size: 32px;
+    }
+    
+    .ew-donation__subheading {
+      font-size: 15px;
+      margin-bottom: 50px;
+    }
+    
+    .ew-donation__step {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    /* Reset order for all steps on mobile */
+    .ew-donation__step:nth-child(even) .ew-donation__step-content {
+      order: 1;
+    }
+
+    .ew-donation__step:nth-child(even) .ew-donation__step-image-wrapper {
+      order: 2;
+    }
+
+    /* Ensure odd steps also have correct order */
+    .ew-donation__step:nth-child(odd) .ew-donation__step-content {
+      order: 1;
+    }
+
+    .ew-donation__step:nth-child(odd) .ew-donation__step-image-wrapper {
+      order: 2;
+    }
+    
+    .ew-donation__step-heading {
+      font-size: 28px;
+    }
+    
+    .ew-donation__step-description {
+      font-size: 15px;
+    }
+    
+  }
+
+  @media (max-width: 480px) {
+    .ew-donation-process-section {
+      padding: 40px 0;
+    }
+    
+    .ew-donation__heading {
+      font-size: 28px;
+    }
+    
+    .ew-donation__subheading {
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+    
+    .ew-donation__step {
+      gap: 24px;
+    }
+
+    /* Reset order for all steps on mobile */
+    .ew-donation__step:nth-child(even) .ew-donation__step-content {
+      order: 1;
+    }
+
+    .ew-donation__step:nth-child(even) .ew-donation__step-image-wrapper {
+      order: 2;
+    }
+
+    .ew-donation__step:nth-child(odd) .ew-donation__step-content {
+      order: 1;
+    }
+
+    .ew-donation__step:nth-child(odd) .ew-donation__step-image-wrapper {
+      order: 2;
+    }
+    
+    .ew-donation__step-heading {
+      font-size: 24px;
+    }
+    
+    .ew-donation__step-description {
+      font-size: 14px;
+    }
+    
+  }
+</style>
+
+{% schema %}
+{
+  "name": "EW Donation Process",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Donation Process"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every Bennani purchase contributes to real change helping restore sight, fight hunger, and bring clean water to communities in need."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Step Heading",
+          "default": "1. You Choose"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step Description",
+          "default": "At checkout, select one of three charities: The Fred Hollows Foundation, Action Against Hunger, or charity: water."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step Image",
+          "info": "Upload an illustration for this step"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EW Donation Process",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "heading": "1. You Choose",
+            "description": "At checkout, select one of three charities: The Fred Hollows Foundation, Action Against Hunger, or charity: water."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "2. We Gather",
+            "description": "10% of profits from your chosen item are set aside. At the end of each month, we collect all contributions together."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "3. They Receive",
+            "description": "The funds are donated directly to the charity you selected - turning every purchase into meaningful change."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

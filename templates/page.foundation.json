@@ -1,0 +1,310 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [
+        ".section-stack {padding-inline: 30vw;}",
+        "@media screen and (max-width: 768px) {.section-stack {padding-inline: 5vw; }}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "show_title": true,
+        "page_width": "full"
+      }
+    },
+    "slideshow_dXhnMQ": {
+      "type": "slideshow",
+      "blocks": {
+        "image_WpM9kk": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/width_2400.png",
+            "subheading": "",
+            "title": "",
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "content_max_width": 780,
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": "linear-gradient(180deg, rgba(54, 54, 54, 0.2), rgba(4, 4, 4, 0.65) 100%)"
+          }
+        }
+      },
+      "block_order": [
+        "image_WpM9kk"
+      ],
+      "custom_css": [
+        ".content-over-media:before {display: none;}"
+      ],
+      "name": "t:sections.slideshow.presets.slideshow.name",
+      "settings": {
+        "allow_transparent_header": true,
+        "show_next_section_button": false,
+        "media_size": "auto",
+        "show_initial_transition": false,
+        "autoplay": true,
+        "autoplay_pause_on_video": true,
+        "cycle_speed": 5,
+        "background": "#000000",
+        "controls_color": "#ffffff"
+      }
+    },
+    "ew_organization_cards_section_C93ea3": {
+      "type": "ew-organization-cards-section",
+      "blocks": {
+        "organization_card_edx4ma": {
+          "type": "organization_card",
+          "settings": {
+            "image": "shopify://shop_images/width_800_5.png",
+            "title": "charity water",
+            "description": "Bring clean and safe water to every person on the planet",
+            "button_text": "LEARN MORE",
+            "button_link": ""
+          }
+        },
+        "organization_card_jPmiRn": {
+          "type": "organization_card",
+          "settings": {
+            "image": "shopify://shop_images/width_740.png",
+            "title": "SOS Children's Villages",
+            "description": "1 in 10 children and young people are separated from their families, abandoned, neglected",
+            "button_text": "LEARN MORE",
+            "button_link": ""
+          }
+        },
+        "organization_card_Vzjrfh": {
+          "type": "organization_card",
+          "settings": {
+            "image": "shopify://shop_images/width_800_6.png",
+            "title": "The Fred Hollows Foundation",
+            "description": "Fred Hollows is remembered for the incredible legacy he left behind",
+            "button_text": "LEARN MORE",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "organization_card_edx4ma",
+        "organization_card_jPmiRn",
+        "organization_card_Vzjrfh"
+      ],
+      "name": "EW Organization Cards",
+      "settings": {
+        "heading": "How your making a change",
+        "button_scheme": "scheme-3"
+      }
+    },
+    "ew_impact_grid_section_afARVF": {
+      "type": "ew-impact-grid-section",
+      "blocks": {
+        "impact_item_xeAeag": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_159.png",
+            "link": ""
+          }
+        },
+        "impact_item_fr4nzY": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_800.png",
+            "link": ""
+          }
+        },
+        "impact_item_HcGcL9": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_800_1.png",
+            "link": ""
+          }
+        },
+        "impact_item_HUEp3j": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_800_2.png",
+            "link": ""
+          }
+        },
+        "impact_item_xAGiaK": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_800_4.png",
+            "link": ""
+          }
+        },
+        "impact_item_ttxTNH": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_800_3.png",
+            "link": ""
+          }
+        },
+        "impact_item_8yGEJU": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_200_1.png",
+            "link": ""
+          }
+        },
+        "impact_item_qrWbTa": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_200.png",
+            "link": ""
+          }
+        },
+        "impact_item_MACd3N": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_800_8.png",
+            "link": ""
+          }
+        },
+        "impact_item_hjrnnb": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_460_1.png",
+            "link": ""
+          }
+        },
+        "impact_item_XnWzJe": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_800_9.png",
+            "link": ""
+          }
+        },
+        "impact_item_NzYd7d": {
+          "type": "impact_item",
+          "settings": {
+            "image": "shopify://shop_images/width_460.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "impact_item_xeAeag",
+        "impact_item_fr4nzY",
+        "impact_item_HcGcL9",
+        "impact_item_HUEp3j",
+        "impact_item_xAGiaK",
+        "impact_item_ttxTNH",
+        "impact_item_8yGEJU",
+        "impact_item_qrWbTa",
+        "impact_item_MACd3N",
+        "impact_item_hjrnnb",
+        "impact_item_XnWzJe",
+        "impact_item_NzYd7d"
+      ],
+      "name": "EW Impact Grid",
+      "settings": {
+        "heading": "Every Purchase, Every Impact",
+        "subheading": "Explore the real stories behind your support."
+      }
+    },
+    "ew_donation_process_section_4bzAcM": {
+      "type": "ew-donation-process-section",
+      "blocks": {
+        "step_edxRdz": {
+          "type": "step",
+          "settings": {
+            "heading": "1. You Choose",
+            "description": "At checkout, select one of three charities: The Fred Hollows Foundation, Action Against Hunger, or charity: water.",
+            "image": "shopify://shop_images/EMILS_DRAFT_FOR_REF_NEW_6.png"
+          }
+        },
+        "step_VtmTMA": {
+          "type": "step",
+          "settings": {
+            "heading": "2. We Gather",
+            "description": "10% of profits from your chosen item are set aside. At the end of each month, we collect all contributions together.",
+            "image": "shopify://shop_images/EMILS_DRAFT_FOR_REF_NEW_5.png"
+          }
+        },
+        "step_BWYjH3": {
+          "type": "step",
+          "settings": {
+            "heading": "3. They Receive",
+            "description": "The funds are donated directly to the charity you selected - turning every purchase into meaningful change.",
+            "image": "shopify://shop_images/WhatsApp_Image_2025-10-24_at_23.58.17.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "step_edxRdz",
+        "step_VtmTMA",
+        "step_BWYjH3"
+      ],
+      "name": "EW Donation Process",
+      "settings": {
+        "heading": "Our Donation Process",
+        "subheading": "Every Bennani purchase contributes to real change helping restore sight, fight hunger, and bring clean water to communities in need."
+      }
+    },
+    "ew_faq_section_9aPdke": {
+      "type": "ew-faq-section",
+      "blocks": {
+        "faq_card_ypMFnN": {
+          "type": "faq_card",
+          "settings": {
+            "image": "shopify://shop_images/EMILS_DRAFT_FOR_REF_NEW.png",
+            "alt_text": "FAQ card"
+          }
+        },
+        "faq_card_Q3DJKk": {
+          "type": "faq_card",
+          "settings": {
+            "image": "shopify://shop_images/EMILS_DRAFT_FOR_REF_NEW_1.png",
+            "alt_text": "FAQ card"
+          }
+        },
+        "faq_card_xKHc63": {
+          "type": "faq_card",
+          "settings": {
+            "image": "shopify://shop_images/EMILS_DRAFT_FOR_REF_NEW_2.png",
+            "alt_text": "FAQ card"
+          }
+        }
+      },
+      "block_order": [
+        "faq_card_ypMFnN",
+        "faq_card_Q3DJKk",
+        "faq_card_xKHc63"
+      ],
+      "name": "EW FAQ Section",
+      "settings": {
+        "heading": "FAQ"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "slideshow_dXhnMQ",
+    "ew_organization_cards_section_C93ea3",
+    "ew_impact_grid_section_afARVF",
+    "ew_donation_process_section_4bzAcM",
+    "ew_faq_section_9aPdke"
+  ]
+}
