@@ -22,48 +22,163 @@
         "page_width": "full"
       }
     },
-    "givingmovement_TnQgTK": {
-      "type": "givingmovement",
+    "slideshow_4pPkMP": {
+      "type": "slideshow",
       "blocks": {
-        "row_mKwz4d": {
-          "type": "row",
+        "video_tVgMiU": {
+          "type": "video",
           "settings": {
-            "tab": "men",
-            "columns": 2,
-            "image_1": "shopify://shop_images/Desktop_Hero_Banner_Image_01_04f7de93-c6b2-473b-878a-ee1aa74f7294.png",
-            "button_text_1": "Click Me",
-            "button_link_1": "shopify://pages/world-of-bennani",
-            "text_1": "",
-            "button_text_2": "Click Me",
-            "button_link_2": "",
-            "text_2": ""
-          }
-        },
-        "row_JcBh9F": {
-          "type": "row",
-          "settings": {
-            "tab": "men",
-            "columns": 1,
-            "image_1": "shopify://shop_images/image_2025-09-16_205332647.png",
-            "button_text_1": "Click Me",
-            "button_link_1": "",
-            "text_1": "",
-            "button_text_2": "Click Me",
-            "button_link_2": "",
-            "text_2": ""
+            "video": "shopify://files/videos/b4cd8ad446a7417bac9d5ee8ebd01536.HD-1080p-7.2Mbps-47320922.mp4",
+            "allow_sound": true,
+            "subheading": "",
+            "title": "",
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "content_max_width": 780,
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": "linear-gradient(180deg, rgba(54, 54, 54, 0.2), rgba(4, 4, 4, 0.65) 100%)"
           }
         }
       },
       "block_order": [
-        "row_mKwz4d",
-        "row_JcBh9F"
+        "video_tVgMiU"
       ],
-      "name": "Giving Movement Tabs",
-      "settings": {}
+      "name": "t:sections.slideshow.presets.slideshow.name",
+      "settings": {
+        "allow_transparent_header": true,
+        "show_next_section_button": false,
+        "media_size": "auto",
+        "show_initial_transition": false,
+        "autoplay": true,
+        "autoplay_pause_on_video": true,
+        "cycle_speed": 5,
+        "background": "#000000",
+        "controls_color": "#ffffff"
+      }
+    },
+    "ew_our_story_section_jNkcKd": {
+      "type": "ew-our-story-section",
+      "blocks": {
+        "image_wWBEJr": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/book_closed.png",
+            "alt_text": "Bennani notebook"
+          }
+        },
+        "image_ExQFri": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/EMILS_DRAFT_FOR_REF_NEW_9.png",
+            "alt_text": "Bennani notebook"
+          }
+        },
+        "image_MXGGCT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/EMILS_DRAFT_FOR_REF_NEW_10.png",
+            "alt_text": "Bennani notebook"
+          }
+        }
+      },
+      "block_order": [
+        "image_wWBEJr",
+        "image_ExQFri",
+        "image_MXGGCT"
+      ],
+      "name": "EW Our Story",
+      "settings": {
+        "heading": "WE ARE BENNANI",
+        "subheading": "this is the part where we tell you more about us"
+      }
+    },
+    "ew_meet_founders_section_GzhRzJ": {
+      "type": "ew-meet-founders-section",
+      "blocks": {
+        "founder_kEtzFX": {
+          "type": "founder",
+          "settings": {
+            "image": "shopify://shop_images/width_600_e4ee3ac8-21cb-4f28-9787-89f2be801e58.jpg",
+            "name": "WAEL NABBOUT",
+            "title": "Bennani Co-founder and Co-Chief Executive Officer"
+          }
+        },
+        "founder_6mLBdd": {
+          "type": "founder",
+          "settings": {
+            "image": "shopify://shop_images/width_450.jpg",
+            "name": "EMIL CELIKOVIC",
+            "title": "Bennani Co-founder and Co-Chief Executive Officer"
+          }
+        }
+      },
+      "block_order": [
+        "founder_kEtzFX",
+        "founder_6mLBdd"
+      ],
+      "name": "EW Meet the Founders",
+      "settings": {
+        "heading": "MEET THE FOUNDERS"
+      }
+    },
+    "ew_journey_section_xXyxwH": {
+      "type": "ew-journey-section",
+      "blocks": {
+        "journey_item_xEUjcQ": {
+          "type": "journey_item",
+          "settings": {
+            "video_url": "shopify://files/videos/CDC64605-31F7-4922-8DE6-C47F6AAE8826.MP4"
+          }
+        },
+        "journey_item_xEhnDh": {
+          "type": "journey_item",
+          "settings": {
+            "image": "shopify://shop_images/IMG_4826.heic"
+          }
+        },
+        "journey_item_VQaAPY": {
+          "type": "journey_item",
+          "settings": {
+            "image": "shopify://shop_images/uri_ifs___V_9WPmbgXYEkbSOdR1Cq-Iq4twzXvRJhpoD2Apc8-qn7E.jpg"
+          }
+        },
+        "journey_item_eXNHyV": {
+          "type": "journey_item",
+          "settings": {
+            "image": "shopify://shop_images/width_600.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "journey_item_xEUjcQ",
+        "journey_item_xEhnDh",
+        "journey_item_VQaAPY",
+        "journey_item_eXNHyV"
+      ],
+      "name": "EW Journey Section",
+      "settings": {
+        "title": "OUR JOURNEY"
+      }
     }
   },
   "order": [
     "main",
-    "givingmovement_TnQgTK"
+    "slideshow_4pPkMP",
+    "ew_our_story_section_jNkcKd",
+    "ew_meet_founders_section_GzhRzJ",
+    "ew_journey_section_xXyxwH"
   ]
 }
