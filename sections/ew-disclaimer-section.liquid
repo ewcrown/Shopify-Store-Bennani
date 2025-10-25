@@ -1,0 +1,196 @@
+{%- comment -%}
+  sections/ew-disclaimer-section.liquid
+  - Simplified Disclaimer + QR section for Shopify
+  - Contains only essential schema settings
+{%- endcomment -%}
+
+<section
+  id="disclaimer-qr-{{ section.id }}"
+  class="disclaimer-qr"
+  aria-label="{{ section.settings.title | escape }}"
+  role="region"
+  itemscope itemtype="https://schema.org/WebPage"
+>
+  <div class="disclaimer-qr__inner">
+    <div class="disclaimer-qr__header-wrap">
+      <header class="disclaimer-qr__header container">
+        {%- if section.settings.title != blank -%}
+          <h2 class="disclaimer-qr__title" itemprop="name">{{ section.settings.title }}</h2>
+        {%- endif -%}
+  
+        {%- if section.settings.description != blank -%}
+          <div class="disclaimer-qr__desc rte" itemprop="description">
+            {{ section.settings.description }}
+          </div>
+        {%- endif -%}
+  
+        <div class="disclaimer-qr__next">
+          <div class="disclaimer-qr__next-label">{{ section.settings.next_label }}</div>
+          <div class="disclaimer-qr__next-arrow" aria-hidden="true">
+            {% render 'ew-arrow-down' %}
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="disclaimer-qr__qr-wrap container" role="group" aria-label="QR code">
+      {%- assign qr_value = section.settings.qr_text | default: "" -%}
+      {%- if qr_value == "https://example.com" -%}
+        {%- assign qr_value = "" -%}
+      {%- endif -%}
+
+      {% if section.settings.qr_image != blank %}
+        <img
+          src="{{ section.settings.qr_image | img_url: 'master' }}"
+          alt="QR code"
+          class="disclaimer-qr__qr"
+          itemprop="image"
+        />
+      {% elsif qr_value != blank %}
+        <img
+          src="https://chart.googleapis.com/chart?cht=qr&chs=420x420&chl={{ qr_value | url_encode }}"
+          alt="QR code"
+          class="disclaimer-qr__qr"
+          itemprop="image"
+        />
+      {% else %}
+        <div class="disclaimer-qr__placeholder">No QR set — add QR image or QR text in section settings.</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": {{ section.settings.title | json }},
+    "description": {{ section.settings.description | strip_html | truncate: 300 | json }},
+    {% if section.settings.qr_image != blank %}
+    "image": {{ section.settings.qr_image | img_url: 'master' | json }},
+    {% endif %}
+    "mainEntity": {
+      "@type": "CreativeWork",
+      "name": {{ section.settings.title | json }},
+      "text": {{ section.settings.description | strip_html | json }},
+      "publisher": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }}
+      }
+    }
+  }
+</script>
+
+<style>
+  #disclaimer-qr-{{ section.id }} .disclaimer-qr__header-wrap{
+    box-shadow: 0 22px 26px -20px #f0f0f0;
+  }
+  .disclaimer-qr__qr-wrap,
+  .disclaimer-qr__header {
+    padding: 120px 24px;
+  }
+    #disclaimer-qr-{{ section.id }} {
+      padding: 40px 0;
+      background: #fff;
+      color: #0b2533;
+      text-align: center;
+    }
+    .disclaimer-qr__title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .disclaimer-qr__desc {
+      max-width: 720px;
+      margin: 0 auto 34px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .disclaimer-qr__next {
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: .95;
+    }
+    .disclaimer-qr__next-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .disclaimer-qr__divider {
+      border: 0;
+      height: 1px;
+      background: rgba(0,0,0,0.06);
+      margin: 18px 0 36px;
+    }
+    .disclaimer-qr__qr-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .disclaimer-qr__qr {
+      display: block;
+      max-width: 100%;
+      width: 420px;
+      height: auto;
+    }
+    .disclaimer-qr__placeholder {
+      color: rgba(0,0,0,0.35);
+      padding: 36px;
+      border: 1px dashed rgba(0,0,0,0.06);
+      border-radius: 6px;
+    }
+    @media (max-width: 767px) {
+      .disclaimer-qr__title { font-size: 28px; }
+      .disclaimer-qr__desc { font-size: 15px; padding: 0 8px; }
+      .disclaimer-qr__qr { width: 300px; }
+        .disclaimer-qr__qr-wrap,
+  .disclaimer-qr__header {
+    padding: 30px 0 !important;
+  }
+    }
+  </style>
+</section>
+
+{%- schema -%}
+{
+  "name": "Disclaimer + QR",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Disclaimer"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description / Body text",
+      "default": "<p>The information contained in this document is confidential, privileged, and only for the information of the intended recipient and may not be used, published, or redistributed without the prior written consent of <strong>BENNANI</strong>.</p>"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "NEXT label text",
+      "default": "NEXT"
+    },
+    {
+      "type": "image_picker",
+      "id": "qr_image",
+      "label": "QR: upload image (optional)"
+    },
+    {
+      "type": "text",
+      "id": "qr_text",
+      "label": "QR text / URL (used to generate QR if no image uploaded)",
+    }
+  ],
+  "presets": [
+    {
+      "name": "Disclaimer + QR",
+      "category": "Text"
+    }
+  ]
+}
+{%- endschema -%}

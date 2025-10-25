@@ -1,0 +1,41 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [
+        ".section-stack {padding-inline: 30vw;}",
+        "@media screen and (max-width: 768px) {.section-stack {padding-inline: 5vw; }}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "show_title": true,
+        "page_width": "full"
+      }
+    },
+    "ew_disclaimer_section_akHbmA": {
+      "type": "ew-disclaimer-section",
+      "name": "Disclaimer + QR",
+      "settings": {
+        "title": "Disclaimer",
+        "description": "<p>The information contained in this document is confidential, privileged, and only for the information of the intended recipient and may not be used, published, or redistributed without the prior written consent of <strong>BENNANI</strong>.</p>",
+        "next_label": "NEXT",
+        "qr_image": "shopify://shop_images/Screenshot_2025-10-23_at_6.58.42_PM.png",
+        "qr_text": "#"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ew_disclaimer_section_akHbmA"
+  ]
+}

@@ -83,6 +83,18 @@ note that this may have impact on different places.
     --text-font-weight: {{ settings.text_font.weight }};
     --text-font-style: {{ settings.text_font.style }};
     --text-letter-spacing: {% if language_code == 'ar' %}0{% else %}{{ settings.text_font_letter_spacing | divided_by: 100.0 }}{% endif %}em;
+    
+    /* Josefin Sans font system - Dynamic font family management */
+    --josefin-sans-family: 'Josefin Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --josefin-sans-light: 300;
+    --josefin-sans-regular: 400;
+    --josefin-sans-medium: 500;
+    --josefin-sans-semibold: 600;
+    --josefin-sans-bold: 700;
+    
+    /* Dynamic font family variables for easy switching */
+    --primary-font-family: var(--josefin-sans-family);
+    --secondary-font-family: {{ settings.text_font.family }}, {{ settings.text_font.fallback_families }};
     --button-font: {% if settings.button_text_font == 'heading' %}var(--heading-font-style) var(--heading-font-weight) var(--text-sm) / 1.65 var(--heading-font-family){% else %}var(--text-font-style) var(--text-font-weight) var(--text-sm) / 1.65 var(--text-font-family){% endif %};
     --button-text-transform: {{ settings.button_text_transform }};
     --button-letter-spacing: {% if language_code == 'ar' %}0{% else %}{{ settings.button_letter_spacing | divided_by: 100.0 }}{% endif %}em;
@@ -127,6 +139,41 @@ note that this may have impact on different places.
 
     --checkmark-svg-url: url({{ 'checkmark.svg' | asset_url }});
     --cursor-zoom-in-svg-url: url({{ 'cursor-zoom-in.svg' | asset_url }});
+  }
+
+  /* Global Josefin Sans font application */
+  body {
+    font-family: var(--primary-font-family);
+  }
+
+  /* Utility classes for dynamic font management */
+  .font-josefin {
+    font-family: var(--josefin-sans-family);
+  }
+  
+  .font-josefin-light {
+    font-family: var(--josefin-sans-family);
+    font-weight: var(--josefin-sans-light);
+  }
+  
+  .font-josefin-regular {
+    font-family: var(--josefin-sans-family);
+    font-weight: var(--josefin-sans-regular);
+  }
+  
+  .font-josefin-medium {
+    font-family: var(--josefin-sans-family);
+    font-weight: var(--josefin-sans-medium);
+  }
+  
+  .font-josefin-semibold {
+    font-family: var(--josefin-sans-family);
+    font-weight: var(--josefin-sans-semibold);
+  }
+  
+  .font-josefin-bold {
+    font-family: var(--josefin-sans-family);
+    font-weight: var(--josefin-sans-bold);
   }
 
   [dir="rtl"]:root {

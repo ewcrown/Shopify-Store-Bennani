@@ -1,3 +1,4 @@
+{% if template.name != 'index' %}
 <style>
   #shopify-section-{{ section.id }} {
     --footer-content-justify-items: {% if section.settings.blocks.size <= 2 %}start{% else %}space-between{% endif %};
@@ -177,6 +178,8 @@
     </div>
   </div>
 </div>
+
+{% endif %}
 
 {% schema %}
 {

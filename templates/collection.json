@@ -15,7 +15,7 @@
         "@media (min-width: 700px) {img {height: 101vh; }}"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "image": "shopify://shop_images/BENNANI_25-3.png",
         "mobile_image": "shopify://shop_images/image_2025-07-14_213546458.png",
         "image_size": "auto",

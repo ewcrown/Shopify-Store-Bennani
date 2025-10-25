@@ -11,30 +11,6 @@
   "type": "header",
   "name": "Header group",
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "blocks": {
-        "message_HNjqjN": {
-          "type": "message",
-          "settings": {
-            "text": "CURRENTLY SHIPPING ONLY TO THE UAE AND UK"
-          }
-        }
-      },
-      "block_order": [
-        "message_HNjqjN"
-      ],
-      "disabled": true,
-      "custom_css": [],
-      "settings": {
-        "color_scheme": "scheme-4",
-        "enable_sticky": false,
-        "autoplay": false,
-        "cycle_speed": 5,
-        "desktop_font_size": 9,
-        "mobile_font_size": 9
-      }
-    },
     "header": {
       "type": "header",
       "blocks": {
@@ -55,7 +31,6 @@
       "block_order": [
         "mega_menu_AF6e3n"
       ],
-      "disabled": true,
       "custom_css": [
         "a {text-transform: uppercase; font-size: var(--text-h6); font-family: var(--heading-font-family); font-style: var(--heading-font-style);}"
       ],
@@ -88,7 +63,6 @@
     }
   },
   "order": [
-    "announcement-bar",
     "header"
   ]
 }

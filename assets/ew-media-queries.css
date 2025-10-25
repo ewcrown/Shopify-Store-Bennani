@@ -1,0 +1,42 @@
+@media(max-width:1024px) {
+  .collection-toolbar__button-container>.collection-toolbar__button {
+    width: max-content;
+    padding-inline: 1rem;
+  }
+}
+
+@media(max-width:767px) {
+  .collection-toolbar__year {
+    display: none;
+  }
+
+  .collection-toolbar__button-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0px;
+    flex-direction: column;
+  }
+
+  .collection-toolbar__button-container {
+    width: 100% !important;
+    text-align: center;
+  }
+
+  .collection-toolbar__filter-wrap {
+    justify-content: space-between;
+    width: 100%;
+    flex-grow: 1;
+  }
+
+
+  .ew-model-slider__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .ew-model-slider__model {
+    order: 0;
+    margin-bottom: 20px;
+  }
+
+}

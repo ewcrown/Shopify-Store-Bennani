@@ -1,0 +1,108 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_QAjd6y": {
+      "type": "slideshow",
+      "blocks": {
+        "image_w3YFM9": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.banner.value }}",
+            "mobile_image": "{{ page.metafields.custom.mobile_banner.value }}",
+            "subheading": "",
+            "title": "",
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-end-center sm:text-center",
+            "content_max_width": 780,
+            "button_1_text": "shop now",
+            "button_1_link": "{{ page.metafields.custom.shop_now.value }}",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": "linear-gradient(180deg, rgba(54, 54, 54, 0.2), rgba(4, 4, 4, 0.65) 100%)"
+          }
+        }
+      },
+      "block_order": [
+        "image_w3YFM9"
+      ],
+      "custom_css": [],
+      "name": "t:sections.slideshow.presets.slideshow.name",
+      "settings": {
+        "allow_transparent_header": true,
+        "show_next_section_button": false,
+        "media_size": "fill",
+        "show_initial_transition": true,
+        "autoplay": false,
+        "autoplay_pause_on_video": false,
+        "cycle_speed": 20,
+        "background": "#000000",
+        "controls_color": "#ffffff"
+      }
+    },
+    "ew_model_look_section_4yTnBN": {
+      "type": "ew-model-look-section",
+      "name": "Model + Product Slider",
+      "settings": {
+        "collection": "{{ page.metafields.custom.shop_the_look.value }}",
+        "model_image": "shopify://shop_images/image_2025-09-16_205332647.png"
+      }
+    },
+    "ew_text_with_video_ngAHjb": {
+      "type": "ew-text-with-video",
+      "name": "Media + Text",
+      "settings": {
+        "title": "{{ page.metafields.custom.video_title.value }}",
+        "content": "",
+        "video_url": "{{ page.metafields.custom.video.value }}",
+        "image_alt": "",
+        "autoplay": false
+      }
+    },
+    "ew_discover_more_section_QVQhnT": {
+      "type": "ew-discover-more-section",
+      "name": "Discover More Section",
+      "settings": {
+        "ew_main_title": "{{ page.metafields.custom.social_media_heading.value }}",
+        "ew_subtitle": "{{ page.metafields.custom.social_media_subheading.value }}",
+        "ew_top_number_1": "20",
+        "ew_top_number_2": "25",
+        "ew_block1_image": "{{ page.metafields.custom.social_media_image_1.value }}",
+        "ew_block1_title": "OUR STORY",
+        "ew_block1_link": "{{ page.metafields.custom.social_media_link_1.value }}",
+        "ew_block2_image": "{{ page.metafields.custom.social_media_image_2.value }}",
+        "ew_block2_title": "FOUNDATION",
+        "ew_block2_link": "{{ page.metafields.custom.social_media_link_2.value }}",
+        "ew_block3_image": "{{ page.metafields.custom.social_media_image_3.value }}",
+        "ew_block3_title": "SOCIAL MEDIA",
+        "ew_block3_link": "{{ page.metafields.custom.social_media_link_3.value }}",
+        "ew_block4_image": "{{ page.metafields.custom.social_media_image_4.value }}",
+        "ew_block4_title": "DELIVERY",
+        "ew_block4_link": "{{ page.metafields.custom.social_media_link_4.value }}"
+      }
+    }
+  },
+  "order": [
+    "slideshow_QAjd6y",
+    "ew_model_look_section_4yTnBN",
+    "ew_text_with_video_ngAHjb",
+    "ew_discover_more_section_QVQhnT"
+  ]
+}
