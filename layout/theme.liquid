@@ -85,7 +85,7 @@
     endif
   %}
 
-  <body class="{{ features_class }} color-scheme color-scheme--{{ settings.default_color_scheme.id }}">
+  <body class="{{ features_class }} color-scheme color-scheme--{{ settings.default_color_scheme.id }} ew-page-{{ page.title | handleize }}">
     {%- render 'shadow-dom-templates' -%}
 
     <loading-bar class="loading-bar" aria-hidden="true"></loading-bar>

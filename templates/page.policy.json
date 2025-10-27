@@ -1,0 +1,116 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [
+        ".section-stack {padding-inline: 30vw;}",
+        "@media screen and (max-width: 768px) {.section-stack {padding-inline: 5vw; }}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "show_title": true,
+        "page_width": "full"
+      }
+    },
+    "givingmovement_TnQgTK": {
+      "type": "givingmovement",
+      "blocks": {
+        "row_mKwz4d": {
+          "type": "row",
+          "settings": {
+            "tab": "men",
+            "columns": 2,
+            "image_1": "shopify://shop_images/Desktop_Hero_Banner_Image_01_04f7de93-c6b2-473b-878a-ee1aa74f7294.png",
+            "button_text_1": "Click Me",
+            "button_link_1": "shopify://pages/world-of-bennani",
+            "text_1": "",
+            "button_text_2": "Click Me",
+            "button_link_2": "",
+            "text_2": ""
+          }
+        },
+        "row_JcBh9F": {
+          "type": "row",
+          "settings": {
+            "tab": "men",
+            "columns": 1,
+            "image_1": "shopify://shop_images/image_2025-09-16_205332647.png",
+            "button_text_1": "Click Me",
+            "button_link_1": "",
+            "text_1": "",
+            "button_text_2": "Click Me",
+            "button_link_2": "",
+            "text_2": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_mKwz4d",
+        "row_JcBh9F"
+      ],
+      "disabled": true,
+      "name": "Giving Movement Tabs",
+      "settings": {}
+    },
+    "ew_faq_page_hV4ACm": {
+      "type": "ew-faq-page",
+      "blocks": {
+        "category_jKkErn": {
+          "type": "category",
+          "settings": {
+            "title": "Terms of Use",
+            "show_title": false,
+            "link": "shopify://pages/terms-of-use"
+          }
+        },
+        "content_AmzVFR": {
+          "type": "content",
+          "settings": {
+            "content": "{{ page.content }}"
+          }
+        },
+        "category_xxWdWJ": {
+          "type": "category",
+          "settings": {
+            "title": "Privacy Policy",
+            "show_title": false,
+            "link": "shopify://pages/privacy-policy"
+          }
+        },
+        "category_Uxkqja": {
+          "type": "category",
+          "settings": {
+            "title": "Accessibility Statement",
+            "show_title": false,
+            "link": "shopify://pages/accessibility-statement"
+          }
+        }
+      },
+      "block_order": [
+        "category_jKkErn",
+        "content_AmzVFR",
+        "category_xxWdWJ",
+        "category_Uxkqja"
+      ],
+      "name": "FAQ Page (Custom)",
+      "settings": {
+        "title": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "givingmovement_TnQgTK",
+    "ew_faq_page_hV4ACm"
+  ]
+}

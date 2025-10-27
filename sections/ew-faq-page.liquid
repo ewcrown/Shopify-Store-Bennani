@@ -1,0 +1,588 @@
+{%- comment -%}
+  Custom FAQ Section - Fear of God Style
+  - Collapsible categories
+  - Accordion questions within each category
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+<section id="ew-faq-page-{{ section.id }}" class="ew-faq-page-section" aria-labelledby="ew-faq-title-{{ section.id }}">
+  <div class="container ew-faq-page__wrapper">
+    
+    {%- if section.settings.title != blank -%}
+      <h2 id="ew-faq-title-{{ section.id }}" class="ew-faq-page__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="ew-faq-page__layout">
+      <!-- Left sidebar with categories -->
+      <div class="ew-faq-page__sidebar">
+        <div class="ew-faq-nav">
+          {%- assign category_open = false -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'category' -%}
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="ew-faq-nav__item" {{ block.shopify_attributes }}>
+                  {{ block.settings.title }}
+                </a>
+              {%- else -%}
+                <button class="ew-faq-nav__item" data-target="category-{{ block.id }}" {{ block.shopify_attributes }}>
+                  {{ block.settings.title }}
+                </button>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Right side content -->
+      <div class="ew-faq-page__content">
+        {%- assign category_open = false -%}
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'category' -%}
+              {%- if category_open -%}
+                </div>
+              {%- endif -%}
+              <div class="ew-faq-category" id="category-{{ block.id }}" data-category="{{ block.id }}">
+                {%- if block.settings.show_title -%}
+                  <h3 class="ew-faq-category__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- assign category_open = true -%}
+            
+            {%- when 'question' -%}
+              {%- if block.settings.question != blank -%}
+                <div class="ew-faq-question" {{ block.shopify_attributes }}>
+                  <div class="ew-faq-question__header">
+                    <button class="ew-faq-question__button" aria-expanded="false" aria-controls="answer-{{ block.id }}">
+                      <span class="ew-faq-question__title">{{ block.settings.question }}</span>
+                      <span class="ew-faq-question__icon">+</span>
+                    </button>
+                  </div>
+                  <div class="ew-faq-question__content" id="answer-{{ block.id }}" aria-hidden="true">
+                    <div class="ew-faq-question__answer prose">
+                      {{ block.settings.answer }}
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            
+            {%- when 'content' -%}
+              {%- if block.settings.content != blank -%}
+                <div class="ew-faq-content prose" {{ block.shopify_attributes }}>
+                  {{ block.settings.content }}
+                </div>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+        {%- if category_open -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ew-faq-page-section {
+    padding: 60px 20px;
+  }
+
+  .ew-faq-page__title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .ew-faq-page__layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  /* Left sidebar */
+  .ew-faq-page__sidebar {
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+  }
+
+  .ew-faq-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ew-faq-nav__item {
+    background: transparent;
+    border: none;
+    padding: 15px 0;
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 1px solid #e5e5e5;
+    transition: color 0.3s ease;
+    color: #666;
+    text-decoration: none;
+    display: block;
+  }
+
+  .ew-faq-nav__item:hover {
+    color: #000;
+  }
+
+  .ew-faq-nav__item.active {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .ew-faq-category {
+    margin-bottom: 4rem;
+  }
+
+  .ew-faq-category:first-of-type {
+    margin-top: 0;
+  }
+
+  .ew-faq-category__title {
+    margin: 0 0 2rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .ew-faq-question:not(:first-child) {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .ew-faq-question__header {
+    margin: 0;
+  }
+
+  .ew-faq-question__button {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 20px 30px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+  }
+
+  .ew-faq-question__button:hover {
+    opacity: 0.7;
+  }
+
+  .ew-faq-question__button[aria-expanded="true"] .ew-faq-question__icon {
+    transform: rotate(45deg);
+  }
+
+  .ew-faq-question__icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 20px;
+  }
+
+  .ew-faq-question__title {
+    flex: 1;
+    color: #000;
+  }
+
+  .ew-faq-question__content {
+    display: none;
+    padding: 0 30px 20px;
+  }
+
+  .ew-faq-question__content[aria-hidden="false"],
+  .ew-faq-question__content.show {
+    display: block;
+  }
+
+  .ew-faq-question__answer {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #000;
+    padding: 10px 0;
+  }
+
+  .ew-faq-question__answer p {
+    margin-bottom: 1rem;
+  }
+
+  .ew-faq-question__answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ew-faq-question__answer ul * {
+  color: #000;
+}
+  .ew-faq-question__answer ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-bottom: 1rem;
+  }
+
+  /* Plain content blocks */
+  .ew-faq-content {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #000;
+    margin-bottom: 2rem;
+    padding: 0 30px;
+  }
+
+  .ew-faq-content {
+    letter-spacing: 0;
+    color: #000;
+}
+
+  .ew-faq-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .ew-faq-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ew-faq-content h2,
+  .ew-faq-content h3,
+  .ew-faq-content h4 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .ew-faq-content h2 {
+    font-size: 1.1rem;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 0.5rem;
+  }
+
+  .ew-faq-content ul,
+  .ew-faq-content ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+  }
+
+  .ew-faq-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .ew-faq-content strong {
+    font-weight: 600;
+  }
+
+  .ew-faq-content em {
+    font-style: italic;
+  }
+
+  .ew-faq-content a {
+    color: #0066cc;
+    text-decoration: underline;
+  }
+
+  .ew-faq-content a:hover {
+    color: #004499;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .ew-faq-page__layout {
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .ew-faq-page-section {
+      padding: 40px 15px;
+    }
+
+    .ew-faq-page__title {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .ew-faq-page__layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .ew-faq-page__sidebar {
+      position: static;
+      margin-bottom: 40px;
+    }
+
+    .ew-faq-nav {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 20px;
+      border-bottom: 1px solid #e5e5e5;
+      padding-bottom: 10px;
+    }
+
+    .ew-faq-nav__item {
+      white-space: nowrap;
+      border-bottom: none;
+      padding: 10px 0;
+      font-size: 0.8rem;
+      display: block;
+    }
+
+    .ew-faq-category {
+      margin-bottom: 3rem;
+    }
+
+    .ew-faq-category__title {
+      font-size: 1rem;
+    }
+
+    .ew-faq-question__button {
+      padding: 15px 20px;
+      font-size: 0.85rem;
+    }
+
+    .ew-faq-question__content {
+      padding: 0 20px 15px;
+    }
+
+    .ew-faq-content {
+      padding: 0 20px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    // Navigation items - only get buttons, not links
+    const navItems = document.querySelectorAll('.ew-faq-nav__item');
+    const navButtons = document.querySelectorAll('.ew-faq-nav__item[data-target]');
+    const questionButtons = document.querySelectorAll('.ew-faq-question__button');
+    const categories = document.querySelectorAll('.ew-faq-category');
+    
+    // Navigation click handlers - only for buttons with data-target
+    navButtons.forEach(function(navItem) {
+      navItem.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-target');
+        const category = document.getElementById(targetId);
+        
+        if (category) {
+          // Remove active class from all nav items
+          navItems.forEach(function(item) {
+            item.classList.remove('active');
+          });
+          
+          // Add active class to clicked nav item
+          this.classList.add('active');
+          
+          // Scroll to category
+          category.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Set first button nav item as active by default (not links)
+    if (navButtons.length > 0) {
+      navButtons[0].classList.add('active');
+    }
+    
+    // Question toggle handlers
+    questionButtons.forEach(function(button) {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        const content = this.parentElement.nextElementSibling;
+        
+        this.setAttribute('aria-expanded', !expanded);
+        if (content) {
+          content.setAttribute('aria-hidden', expanded);
+          if (expanded) {
+            content.style.display = 'none';
+            content.classList.remove('show');
+          } else {
+            content.style.display = 'block';
+            content.classList.add('show');
+          }
+        }
+      });
+    });
+
+    // Active navigation on scroll
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const categoryId = entry.target.id;
+          
+          // Update active nav item - only for buttons
+          navItems.forEach(function(item) {
+            if (item.tagName === 'BUTTON' && item.getAttribute('data-target') === categoryId) {
+              item.classList.add('active');
+            } else {
+              item.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    // Observe each category
+    categories.forEach(function(category) {
+      observer.observe(category);
+    });
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ Page (Custom)",
+  "class": "shopify-section--ew-faq-page",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "FREQUENTLY ASKED QUESTIONS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "ORDERS"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_title",
+          "label": "Show heading in content area",
+          "info": "Display the category title as a heading on the right side",
+          "default": true
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Category Link (optional)",
+          "info": "If provided, clicking this category will navigate to this link instead of scrolling to the section"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is your return policy?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Eligible items can be returned within 15 days of shipping. Items must be unworn and in original packaging.</p>"
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "name": "Content",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Enter your content here. This will display as plain text without accordion functionality, similar to terms of use pages.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Page (Custom)",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "ORDERS"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What items are final sale?",
+            "answer": "<ul><li>Essentials</li><li>Collaborations</li><li>Sale items</li><li>The California</li><li>Athletics Footwear</li></ul>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Can I change or cancel my order?",
+            "answer": "<p>Once an order is placed, it cannot be cancelled or changed.</p>"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "RETURNS"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Eligible items can be returned within 15 days of the shipping date. Items must be unworn, unaltered, and in their original packaging with all tags attached.</p>"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "TERMS OF USE"
+          }
+        },
+        {
+          "type": "content",
+          "settings": {
+            "content": "<h2>Last updated on September, 2020</h2><p>Welcome to our website. These Terms of Use apply to all visitors, users, and others who access this Website. By accessing or using the Website, you agree to be bound by these Terms of Use.</p><h2>Acceptance of Terms</h2><p>Please read these Terms of Use carefully before you start to use this Website. If you do not agree to these Terms of Use, you must not access or use this Site.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

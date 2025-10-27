@@ -54,7 +54,7 @@
         {%- endif -%}
 
         {%- assign image_obj = section.settings.image -%}
-        {%- assign image_alt = section.settings.image_alt | default: section.settings.title -%}
+        {%- assign image_alt = section.settings.title | default: 'Media image' -%}
 
         {%- comment -%}
           Decide which media to render:
@@ -80,6 +80,20 @@
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
                   title="{{ section.settings.title | default: 'Video' | escape }}"></iframe>
+                {% comment %} Show image as thumbnail overlay if both video and image exist {% endcomment %}
+                {%- if image_obj != blank -%}
+                  <div class="ew-media-text__iframe-poster">
+                    <img 
+                      src="{{ image_obj | image_url: width: image_obj.width }}" 
+                      srcset="{{ image_obj | image_url: width: 500 }} 500w, {{ image_obj | image_url: width: 1000 }} 1000w"
+                      sizes="100vw"
+                      alt="{{ image_alt | escape }}" 
+                      class="ew-media-text__iframe-poster-img"
+                      width="{{ image_obj.width }}"
+                      height="{{ image_obj.height }}"
+                      loading="lazy" />
+                  </div>
+                {%- endif -%}
               </div>
 
             {% else %}
@@ -92,6 +106,7 @@
                   autoplay
                   playsinline
                   preload="metadata"
+                  {% if image_obj != blank %}poster="{{ image_obj | image_url: width: image_obj.width }}"{% endif %}
                   {% if section.settings.autoplay == true %} autoplay muted loop {% endif %}>
                   Sorry, your browser doesn't support embedded videos.
                 </video>
@@ -102,7 +117,15 @@
         {% elsif image_obj != blank %}
           <div class="ew-media-text__media ew-media-text__media--image">
             <div class="ew-media-text__image-wrap">
-              <img class="ew-media-text__image" src="{{ image_obj | img_url: 'master' }}" alt="{{ image_alt | escape }}" />
+              <img 
+                class="ew-media-text__image" 
+                src="{{ image_obj | image_url: width: image_obj.width }}" 
+                srcset="{{ image_obj | image_url: width: 500 }} 500w, {{ image_obj | image_url: width: 1000 }} 1000w"
+                sizes="100vw"
+                alt="{{ image_alt | escape }}"
+                width="{{ image_obj.width }}"
+                height="{{ image_obj.height }}"
+                loading="lazy" />
             </div>
           </div>
 
@@ -182,6 +205,29 @@
     /* If you want to preserve the full video frame (no cropping), change object-fit to 'contain' */
     /* .ew-media-text__video, .ew-media-text__image { object-fit: contain; background: #000; } */
 
+    /* Iframe poster image (thumbnail overlay) */
+    .ew-media-text__iframe-poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .ew-media-text__iframe-poster-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Show poster image until video loads (you can adjust this behavior with JS if needed) */
+    .ew-media-text__iframe-wrap:hover .ew-media-text__iframe-poster {
+      opacity: 0.3;
+    }
+
     .ew-media-text__placeholder {
       width: 100%;
       height: 320px;
@@ -236,12 +282,8 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Fallback image (used if no video URL provided)"
-    },
-    {
-      "type": "text",
-      "id": "image_alt",
-      "label": "Image alt text"
+      "label": "Image (poster for video, fallback if no video)",
+      "info": "Used as a video thumbnail/poster when both video and image are provided"
     },
     {
       "type": "checkbox",

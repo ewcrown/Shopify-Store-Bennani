@@ -123,3 +123,7 @@
 .ew-model-slider__slider-wrap {
   padding: 120px 0;
 }
+
+.ew-page-atlas .custom-footer{
+  background: #000 !important;
+}

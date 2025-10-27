@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [
+        ".section-stack {padding-inline: 30vw;}",
+        "@media screen and (max-width: 768px) {.section-stack {padding-inline: 5vw; }}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "show_title": true,
+        "page_width": "full"
+      }
+    },
+    "ew_faq_page_JJWkzc": {
+      "type": "ew-faq-page",
+      "blocks": {
+        "category_3xRjX8": {
+          "type": "category",
+          "settings": {
+            "title": "ORDERS",
+            "show_title": true,
+            "link": ""
+          }
+        },
+        "question_cqBqUR": {
+          "type": "question",
+          "settings": {
+            "question": "What items are final sale?",
+            "answer": "<ul><li>Essentials</li><li>Collaborations</li><li>Sale items</li><li>The California</li><li>Athletics Footwear</li></ul>"
+          }
+        },
+        "question_4QkQkT": {
+          "type": "question",
+          "settings": {
+            "question": "Can I change or cancel my order?",
+            "answer": "<p>Once an order is placed, it cannot be cancelled or changed.</p>"
+          }
+        },
+        "category_WiCRJi": {
+          "type": "category",
+          "settings": {
+            "title": "RETURNS",
+            "show_title": true,
+            "link": ""
+          }
+        },
+        "question_A7CPJF": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Eligible items can be returned within 15 days of the shipping date. Items must be unworn, unaltered, and in their original packaging with all tags attached.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_3xRjX8",
+        "question_cqBqUR",
+        "question_4QkQkT",
+        "category_WiCRJi",
+        "question_A7CPJF"
+      ],
+      "name": "FAQ Page (Custom)",
+      "settings": {
+        "title": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ew_faq_page_JJWkzc"
+  ]
+}

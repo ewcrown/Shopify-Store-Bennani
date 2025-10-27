@@ -25,7 +25,7 @@
             "content_max_width": 780,
             "button_1_text": "Explore all collections",
             "button_1_link": "shopify://pages/initiles",
-            "button_1_style": "solid",
+            "button_1_style": "outline",
             "button_1_background": "#ffffff",
             "button_1_text_color": "#031f38",
             "button_2_text": "",
@@ -43,10 +43,6 @@
       },
       "block_order": [
         "video_TP8wPG"
-      ],
-      "custom_css": [
-        "@media screen and (min-width: 1024px) {.button--outline {border-width: 0.125rem; width: 25vw; }}",
-        "@media screen and (max-width: 769px) {.button--outline {border-width: 0.125rem; width: 50vw; }}"
       ],
       "name": "t:sections.slideshow.presets.slideshow.name",
       "settings": {

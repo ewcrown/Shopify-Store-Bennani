@@ -71,8 +71,7 @@
       "settings": {
         "title": "{{ page.metafields.custom.video_title.value }}",
         "content": "",
-        "video_url": "{{ page.metafields.custom.video.value }}",
-        "image_alt": "",
+        "video_url": "shopify://files/videos/43C9634A-2F21-44FD-AEF7-E16F06EFE30A.MP4",
         "autoplay": false
       }
     },
@@ -81,6 +80,7 @@
       "name": "Discover More Section",
       "settings": {
         "ew_main_title": "{{ page.metafields.custom.social_media_heading.value }}",
+        "button_scheme": "scheme-4",
         "ew_subtitle": "{{ page.metafields.custom.social_media_subheading.value }}",
         "ew_top_number_1": "20",
         "ew_top_number_2": "25",
