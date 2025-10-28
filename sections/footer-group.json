@@ -15,7 +15,7 @@
       "type": "footer",
       "settings": {
         "logo_image": "shopify://shop_images/width_200_c09cdaba-a6ba-4e2a-a301-de8b09f411a1.png",
-        "legal_link": "/policies/terms-of-service",
+        "legal_link": "shopify://pages/privacy-policy",
         "contact_link": "/pages/contact",
         "show_payment_icons": true
       }

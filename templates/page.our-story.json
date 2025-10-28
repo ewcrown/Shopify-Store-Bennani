@@ -75,7 +75,7 @@
         "image_wWBEJr": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/book_closed.png",
+            "image": "shopify://shop_images/book_closed_1200x1200_1.png",
             "alt_text": "Bennani notebook"
           }
         },
