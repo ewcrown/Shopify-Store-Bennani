@@ -480,19 +480,19 @@
                   {% assign btitle = entry[titf] %}
                   {% assign blink = entry[linkf] %}
                   {% if i == 1 %}
-                    {% assign bimg = entry.block1_image | default: section.settings.block1_image %}
+                    {% assign bimg = entry.social_image_1 | default: section.settings.block1_image %}
                     {% assign btitle = entry.block1_title | default: section.settings.block1_title %}
                     {% assign blink = entry.block1_link | default: section.settings.block1_link %}
                   {% elsif i == 2 %}
-                    {% assign bimg = entry.block2_image | default: section.settings.block2_image %}
+                    {% assign bimg = entry.social_image_2 | default: section.settings.block2_image %}
                     {% assign btitle = entry.block2_title | default: section.settings.block2_title %}
                     {% assign blink = entry.block2_link | default: section.settings.block2_link %}
                   {% elsif i == 3 %}
-                    {% assign bimg = entry.block3_image | default: section.settings.block3_image %}
+                    {% assign bimg = entry.social_image_3 | default: section.settings.block3_image %}
                     {% assign btitle = entry.block3_title | default: section.settings.block3_title %}
                     {% assign blink = entry.block3_link | default: section.settings.block3_link %}
                   {% elsif i == 4 %}
-                    {% assign bimg = entry.block4_image | default: section.settings.block4_image %}
+                    {% assign bimg = entry.social_image_4 | default: section.settings.block4_image %}
                     {% assign btitle = entry.block4_title | default: section.settings.block4_title %}
                     {% assign blink = entry.block4_link | default: section.settings.block4_link %}
                   {% endif %}
@@ -526,8 +526,15 @@
   body[data-theme-mode='dark'] .custom-footer {
     background: #000 !important;
   }
-  .header * {
+  .header__secondary-nav *,
+  .header__primary-nav .header__menu-disclosure > summary,
+  .header__primary-nav .header__primary-nav-item > a {
     color: #fff;
+  }
+
+  .header.is-solid .header__primary-nav .header__menu-disclosure > summary,
+  .header.is-solid .header__primary-nav .header__primary-nav-item > a {
+    color: #000 !important;
   }
   .ew-discover-more-section {
     background: #f4f4f4;
@@ -570,6 +577,7 @@
     width: 100%;
     z-index: 1;
     background-color: transparent;
+    padding: 10px 0;
   }
   .header.is-solid {
     background-color: #fff;
@@ -577,6 +585,19 @@
   .header.is-solid * {
     color: #000;
   }
+  
+  .header:has(.mega-menu-disclosure[open])::before,
+  .header:has(.mega-menu-disclosure[aria-expanded="true"])::before,
+  .header:has(mega-menu-disclosure[open])::before,
+  .header:has(mega-menu-disclosure[aria-expanded="true"])::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    pointer-events: auto;
+  }
+  
   .ew-scroll-links-section {
     position: relative;
   }
@@ -622,7 +643,7 @@
 
   .ew-scroll-links__item {
     flex: 0 0 175px; /* Fixed width for exactly 3 items */
-    padding: 10px 20px;
+    padding: 0px 20px;
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
@@ -630,10 +651,12 @@
     text-transform: uppercase;
     letter-spacing: 0;
     transition: all 0.3s ease;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
     border-bottom: 2px solid transparent;
     white-space: nowrap;
     background: transparent;
-    border: 0;
     cursor: pointer;
   }
   /* Light theme - dark text */
@@ -791,16 +814,13 @@
   }
   @media (max-width: 768px) {
     .ew-discover-more-section .ew-arrows-wrapper {
-      grid-template-columns: repeat(2, 1fr);
+      display: none;
     }
     .ew-discover-more-section .ew-year-text {
       font-size: 36px;
     }
   }
   @media (max-width: 480px) {
-    .ew-discover-more-section .ew-arrows-wrapper {
-      grid-template-columns: 1fr;
-    }
     .ew-discover-more-section .ew-year-text {
       font-size: 28px;
     }
@@ -897,7 +917,7 @@
     transition: all 0.3s ease;
     color: #ffffff;
     padding: 0;
-}
+  }
   .ew-video-mute-btn:hover {
     background: rgba(0, 0, 0, 0.8);
     transform: scale(1.1);
@@ -920,6 +940,14 @@
     }
   }
 
+  .header:hover {
+    background-color: #fff !important; 
+  }
+  .header:hover .header__secondary-nav *, 
+  .header:hover .header__primary-nav .header__menu-disclosure > summary,
+  .header:hover .header__primary-nav .header__primary-nav-item > a {
+    color: #000 !important;
+  }
   /* Hero banner tab layout */
   .ew-hero-banner-tab {
     margin-top: 20px;
@@ -943,7 +971,7 @@
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10;
+    z-index: 1;
   }
   @media (max-width: 768px) {
     .ew-hero-banner__button-wrapper {
@@ -999,10 +1027,14 @@
 
   @media (max-width: 1024px) {
     .ew-model-slider__inner {
-      grid-template-columns: 1fr;
-      gap: 20px;
+      display: block;
+      padding-top: 0;
     }
     .ew-model-slider__slider-wrap {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .ew-model-slider__inner-wrap {
       padding: 40px 0;
     }
   }
