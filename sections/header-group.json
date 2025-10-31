@@ -11,66 +11,6 @@
   "type": "header",
   "name": "Header group",
   "sections": {
-    "ew_scroll_links_section_cY4rqm": {
-      "type": "ew-scroll-links-section",
-      "blocks": {
-        "scroll_link_FTERxV": {
-          "type": "scroll_link",
-          "settings": {
-            "text": "INITILES",
-            "link": "shopify://pages/initiles"
-          }
-        },
-        "scroll_link_tMQnpG": {
-          "type": "scroll_link",
-          "settings": {
-            "text": "MEMBERS CLUB",
-            "link": "shopify://pages/members-club"
-          }
-        },
-        "scroll_link_ghWwKL": {
-          "type": "scroll_link",
-          "settings": {
-            "text": "ATLAS",
-            "link": "shopify://pages/atlas"
-          }
-        },
-        "scroll_link_8B9PL6": {
-          "type": "scroll_link",
-          "settings": {
-            "text": "INITILES",
-            "link": "shopify://pages/initiles"
-          }
-        },
-        "scroll_link_fGmTz6": {
-          "type": "scroll_link",
-          "settings": {
-            "text": "MEMBERS CLUB",
-            "link": "shopify://pages/members-club"
-          }
-        },
-        "scroll_link_PKnjXG": {
-          "type": "scroll_link",
-          "settings": {
-            "text": "ATLAS",
-            "link": "#"
-          }
-        }
-      },
-      "block_order": [
-        "scroll_link_FTERxV",
-        "scroll_link_tMQnpG",
-        "scroll_link_ghWwKL",
-        "scroll_link_8B9PL6",
-        "scroll_link_fGmTz6",
-        "scroll_link_PKnjXG"
-      ],
-      "name": "EW Scroll Links",
-      "settings": {
-        "heading": "",
-        "theme": "light"
-      }
-    },
     "header": {
       "type": "header",
       "blocks": {
@@ -123,7 +63,6 @@
     }
   },
   "order": [
-    "ew_scroll_links_section_cY4rqm",
     "header"
   ]
 }

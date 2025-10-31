@@ -1,9 +1,13 @@
+* {
+  letter-spacing: 0 !important;
+}
+
 .button {
   border-radius: 30px;
 }
 
 .slideshow__slide-content .button {
-  font-size: 14px;
+  font-size: 10px;
   line-height: normal;
 }
 
@@ -46,7 +50,11 @@
   display: grid;
   grid-template-columns: 40% 55%;
   gap: 30px;
-  align-items: flex-end;
+  align-items: flex-end;padding-top: 60px;
+}
+
+.ew-model-slider__slider-wrap {
+  margin-bottom: 40px;
 }
 
 .ew-model-slider__model {
@@ -87,7 +95,7 @@
 
 .ew-model-slide__figure {
   background: #f7f7f7;
-  padding: 40px;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,17 +107,6 @@
   object-fit: contain;
   display: block;
 }
-
-.ew-model-slide__meta {
-  text-align: center;
-  margin-top: 12px;
-  font-size: 13px;
-}
-
-.ew-model-slider__slider-wrap {
-  padding: 120px 0;
-}
-
 .ew-page-atlas .custom-footer{
   background: #000 !important;
 }
@@ -122,4 +119,13 @@
   .slideshow__slide-content .button {
     font-size: 12px;
   }
+}
+
+.shopify-pc__banner__dialog {
+  display: none !important;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }

@@ -1,35 +1,584 @@
-{% if template.name != 'index' %}
-<section class="ew-scroll-links-section" data-theme="{{ section.settings.theme | default: 'light' }}">
-  <div class="container">
-    {% if section.settings.heading != blank %}
-      <h2 class="ew-scroll-links__heading">{{ section.settings.heading }}</h2>
-    {% endif %}
-    
-    <div class="ew-scroll-links__wrapper">
-      <div class="ew-scroll-links__container">
-        {% for block in section.blocks %}
-          <a href="{{ block.settings.link | default: '#' }}" class="ew-scroll-links__item" {{ block.shopify_attributes }}>
-            {{ block.settings.text }}
-          </a>
-        {% endfor %}
-      </div>
+<section class="ew-scroll-links-section" id="ew-scroll-links-{{ section.id }}" data-theme-mode="light">
+  {% liquid
+    assign definition_handle = section.settings.metaobject_definition_handle | default: 'shop_collection'
+  %}
+
+  <div class="ew-scroll-links__wrapper">
+    <div class="ew-scroll-links__container" role="tablist">
+      {% assign meta_values = shop.metaobjects[definition_handle].values %}
+      {% assign sorted_entries = meta_values | sort: 'position' %}
+      {% for entry in sorted_entries %}
+        {% assign slug = entry.id | default: forloop.index %}
+        {% assign tab_name = entry.tab_name %}
+        <button
+          type="button"
+          class="ew-scroll-links__item{% if forloop.first %} is-active{% endif %}"
+          role="tab"
+          aria-controls="tab-panel-{{ slug }}"
+          data-tab-target="tab-panel-{{ slug }}"
+        >
+          {{ tab_name }}
+        </button>
+      {% endfor %}
     </div>
+  </div>
+
+  <div class="ew-tabs__panels">
+    {% assign meta_values = shop.metaobjects[definition_handle].values %}
+    {% assign sorted_entries = meta_values | sort: 'position' %}
+    {% for entry in sorted_entries %}
+      {% assign slug = entry.id | default: forloop.index %}
+      {% assign tab_name = entry.tab_name %}
+      {% assign bennani_video_title = entry.bennani_video_title %}
+      {% assign hero_banner = entry.hero_banner_media %}
+      {% assign bennani_video = entry.bennani_media.value %}
+      {% assign collection_link = entry.collection_link.value %}
+      {% assign hero_button_text = 'shop now' %}
+      {% assign hero_button_link = collection_link.url %}
+      {% assign theme_mode = entry.theme_mode %}
+      <div
+        id="tab-panel-{{ slug }}"
+        class="ew-tab-panel"
+        role="tabpanel"
+        data-theme-mode="{{ theme_mode | default: 'light' }}"
+        {% unless forloop.first %}
+          hidden
+        {% endunless %}
+      >
+        {% comment %}
+          {% if tab_name %}
+            <h3 class="ew-tab-panel__title">{{ tab_name }}</h3>
+          {% endif %}
+        {% endcomment %}
+        <div class="ew-tab-panel__content">
+          <div class="ew-hero-banner-tab">
+            {% if hero_banner %}
+              <div class="ew-hero-banner">
+                {% assign hero_media_type = hero_banner.media_type | default: 'image' %}
+                {% if hero_media_type == 'video' or hero_media_type == 'external_video' %}
+                  {% render 'media', media: hero_banner, autoplay: false, loop: true, controls: true %}
+                {% else %}
+                  {{
+                    hero_banner
+                    | image_url: width: hero_banner.width
+                    | image_tag:
+                      loading: 'lazy',
+                      sizes: '100vw',
+                      widths: '1200,1600,2000,2400,3200',
+                      class: 'ew-hero-banner__img'
+                  }}
+                {% endif %}
+                {% if hero_button_text and hero_button_link %}
+                  <div class="ew-hero-banner__button-wrapper">
+                    <a href="{{ hero_button_link }}" class="button" style="--button-background: 255 255 255;--button-outline-color: 255 255 255;--button-text-color: 3 31 56;">{{ hero_button_text }}</a>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% assign ms_collection = collection_link %}
+            {% assign ms_limit = entry.limit | default: 6 %}
+            {% assign ms_model_image = entry.model_image %}
+            {% assign coll = ms_collection %}
+            {% if coll and coll.products_count > 0 %}
+              {% assign first_product = coll.products.first %}
+              {% assign first_model_img = first_product.metafields.custom.model_image %}
+              {% unless ms_model_image %}
+                {% if first_model_img %}
+                  {% assign ms_model_image = first_model_img %}
+                {% endif %}
+              {% endunless %}
+            {% endif %}
+            {% if ms_model_image or ms_collection %}
+              <div class="ew-model-slider__inner-wrap">
+                <div class="container">
+                  <div class="ew-model-slider__inner">
+                    <div class="ew-model-slider__model-wrap">
+                      <div class="ew-model-slider__model">
+                        {% if ms_model_image %}
+                          {% assign model_img_id = 'ew-model-image-'
+                            | append: section.id
+                            | append: '-'
+                            | append: slug
+                          %}
+                          <img
+                            id="{{ model_img_id }}"
+                            src="{{ ms_model_image | image_url: width: 800 }}"
+                            alt="Model"
+                            loading="lazy"
+                            sizes="(max-width: 1024px) 100vw, 35vw"
+                            srcset="{{ ms_model_image | image_url: width: 400 }} 400w, {{ ms_model_image | image_url: width: 600 }} 600w, {{ ms_model_image | image_url: width: 800 }} 800w, {{ ms_model_image | image_url: width: 1000 }} 1000w"
+                            width="{{ ms_model_image.width }}"
+                            height="{{ ms_model_image.height }}"
+                          >
+                        {% else %}
+                          <div
+                            id="ew-model-image-{{ section.id }}-{{ slug }}"
+                            class="ew-model-slider__model-placeholder"
+                          >
+                            Model image not set
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="ew-model-slider__slider-wrap">
+                      <h3 class="ew-model-slider__title">Shop the Look</h3>
+                      <div id="ew-splide-{{ section.id }}-{{ slug }}" class="splide ew-splide">
+                        <div class="splide__track">
+                          <ul class="splide__list">
+                            {% if coll and coll.products_count > 0 %}
+                              {% for product in coll.products limit: ms_limit %}
+                                {% assign model_img = product.metafields.custom.model_image %}
+                                {% if model_img %}
+                                  {% assign model_img_url = model_img | image_url: width: 1200 %}
+                                  {% assign model_img_400 = model_img | image_url: width: 400 %}
+                                  {% assign model_img_600 = model_img | image_url: width: 600 %}
+                                  {% assign model_img_800 = model_img | image_url: width: 800 %}
+                                  {% assign model_img_1000 = model_img | image_url: width: 1000 %}
+                                  {% assign model_img_srcset = model_img_400
+                                    | append: ' 400w, '
+                                    | append: model_img_600
+                                    | append: ' 600w, '
+                                    | append: model_img_800
+                                    | append: ' 800w, '
+                                    | append: model_img_1000
+                                    | append: ' 1000w'
+                                  %}
+                                {% else %}
+                                  {% assign model_img_url = '' %}
+                                  {% assign model_img_srcset = '' %}
+                                {% endif %}
+                                <li
+                                  class="ew-model-slide splide__slide"
+                                  data-model-image="{{ model_img_url }}"
+                                  data-model-image-srcset="{{ model_img_srcset }}"
+                                  tabindex="0"
+                                >
+                                  <div class="ew-model-slide__inner">
+                                    <div class="ew-model-slide__figure">
+                                      {% if product.featured_image %}
+                                        {{
+                                          product.featured_image
+                                          | image_url: width: 480
+                                          | image_tag:
+                                            alt: product.title,
+                                            loading: 'lazy',
+                                            sizes: '(max-width: 768px) 80vw, 33vw',
+                                            widths: '240,360,480'
+                                        }}
+                                      {% else %}
+                                        <div style="height:200px;width:100%;display:flex;align-items:center;justify-content:center;color:#999;">
+                                          No image
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                    <div class="ew-model-slide__meta">
+                                      <div class="ew-model-slide__title">{{ product.title }}</div>
+                                      <a
+                                        href="{{ product.url }}"
+                                        class="ew-model-slide__button"
+                                        aria-label="View {{ product.title }}"
+                                        >View Product</a
+                                      >
+                                    </div>
+                                  </div>
+                                </li>
+                              {% endfor %}
+                            {% else %}
+                              <li class="splide__slide">No products found.</li>
+                            {% endif %}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <script>
+                (function () {
+                  function updateModelImage(slide, modelImageEl) {
+                    if (!slide || !modelImageEl) return;
+                    var img = slide.getAttribute('data-model-image');
+                    var srcset = slide.getAttribute('data-model-image-srcset');
+                    if (img && img.trim() !== '' && modelImageEl.tagName.toLowerCase() === 'img') {
+                      modelImageEl.style.opacity = 0;
+                      setTimeout(function () {
+                        modelImageEl.src = img;
+                        if (srcset && srcset.trim() !== '') {
+                          modelImageEl.srcset = srcset;
+                        }
+                        modelImageEl.style.opacity = 1;
+                      }, 200);
+                    }
+                  }
+                  function init() {
+                    var splideEl = document.getElementById('ew-splide-{{ section.id }}-{{ slug }}');
+                    var modelImageEl = document.getElementById('ew-model-image-{{ section.id }}-{{ slug }}');
+                    if (!splideEl) return;
+                    if (typeof Splide === 'undefined') return setTimeout(init, 120);
+                    var splide = new Splide(splideEl, {
+                      perPage: 2,
+                      perMove: 1,
+                      gap: '12px',
+                      pagination: false,
+                      arrows: true,
+                      breakpoints: {
+                        1024: { perPage: 2 },
+                        768: { perPage: 1 },
+                        480: { perPage: 1 },
+                      },
+                    });
+                    var slides = splideEl.querySelectorAll('.ew-model-slide');
+                    if (slides.length > 0 && modelImageEl) {
+                      var firstSlide = slides[0];
+                      var firstImg = firstSlide.getAttribute('data-model-image');
+                      var firstSrcset = firstSlide.getAttribute('data-model-image-srcset');
+                      if (firstImg && modelImageEl.tagName.toLowerCase() === 'img') {
+                        modelImageEl.src = firstImg;
+                        if (firstSrcset && firstSrcset.trim() !== '') {
+                          modelImageEl.srcset = firstSrcset;
+                        }
+                      }
+                      slides.forEach(function (slide) {
+                        var slideImage = slide.querySelector('.ew-model-slide__figure');
+                        var slideTitle = slide.querySelector('.ew-model-slide__title');
+                        if (slideImage) {
+                          slideImage.style.cursor = 'pointer';
+                          slideImage.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            updateModelImage(slide, modelImageEl);
+                          });
+                        }
+                        if (slideTitle) {
+                          slideTitle.style.cursor = 'pointer';
+                          slideTitle.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            updateModelImage(slide, modelImageEl);
+                          });
+                        }
+                      });
+                    }
+                    splide.on('moved', function (newIndex) {
+                      var slides = splideEl.querySelectorAll('.ew-model-slide');
+                      var active = slides[newIndex];
+                      if (active) {
+                        updateModelImage(active, modelImageEl);
+                      }
+                    });
+                    splide.mount();
+                  }
+                  document.addEventListener('DOMContentLoaded', init);
+                })();
+              </script>
+            {% endif %}
+
+            {% if bennani_video %}
+              {% assign mt_media_type = bennani_video.media_type | default: 'image' %}
+              {% assign mt_button_text = entry.button_text %}
+              {% assign mt_button_link = entry.button_link %}
+              {% assign mt_image_position = entry.image_position | default: 'start' %}
+              <div class="ew-bennani-presets-section">
+                <div class="container">
+                  <div class="image-with-text {% if mt_image_position == 'end' %}image-with-text--reverse{% endif %}">
+                    <div class="text-center">BENNANI PRESETS INITILS</div>
+                    <div class="image-with-text__media">
+                      {% if mt_media_type == 'video' or mt_media_type == 'external_video' %}
+                        <div class="ew-video-wrapper" id="ew-video-wrapper-{{ section.id }}-{{ slug }}">
+                          {% render 'media',
+                            media: bennani_video,
+                            autoplay: true,
+                            loop: true,
+                            controls: false,
+                            muted: true
+                          %}
+                          <button
+                            class="ew-video-mute-btn"
+                            id="ew-video-mute-{{ section.id }}-{{ slug }}"
+                            aria-label="Toggle mute"
+                            title="Toggle mute"
+                          >
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+                            </svg>
+                          </button>
+                        </div>
+                        <script>
+                          (function () {
+                            var wrapper = document.getElementById('ew-video-wrapper-{{ section.id }}-{{ slug }}');
+                            var muteBtn = document.getElementById('ew-video-mute-{{ section.id }}-{{ slug }}');
+                            if (!wrapper || !muteBtn) return;
+
+                            var video = wrapper.querySelector('video');
+                            var videoMedia = wrapper.querySelector('video-media');
+                            if (!video && !videoMedia) return;
+
+                            function updateMuteIcon(isMuted) {
+                              var svg = muteBtn.querySelector('svg');
+                              if (!svg) return;
+                              if (isMuted) {
+                                svg.innerHTML =
+                                  '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" fill="currentColor"/>';
+                              } else {
+                                svg.innerHTML =
+                                  '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>';
+                              }
+                            }
+
+                            function getActualVideo() {
+                              if (video) return video;
+                              if (videoMedia) {
+                                var actualVideo = videoMedia.querySelector('video');
+                                if (actualVideo) return actualVideo;
+                                var iframe = videoMedia.querySelector('iframe');
+                                if (iframe && iframe.src) return null;
+                              }
+                              return null;
+                            }
+
+                            muteBtn.addEventListener('click', function () {
+                              var actualVideo = getActualVideo();
+                              if (actualVideo) {
+                                if (actualVideo.muted) {
+                                  actualVideo.muted = false;
+                                  updateMuteIcon(false);
+                                } else {
+                                  actualVideo.muted = true;
+                                  updateMuteIcon(true);
+                                }
+                              }
+                            });
+
+                            var actualVideo = getActualVideo();
+                            if (actualVideo) {
+                              actualVideo.addEventListener('loadedmetadata', function () {
+                                actualVideo.muted = true;
+                                updateMuteIcon(true);
+                              });
+
+                              if (actualVideo.readyState >= 2) {
+                                updateMuteIcon(actualVideo.muted);
+                              }
+
+                              actualVideo.muted = true;
+                              updateMuteIcon(true);
+                            } else if (videoMedia) {
+                              updateMuteIcon(true);
+                            }
+                          })();
+                        </script>
+                      {% else %}
+                        {{
+                          bennani_video
+                          | image_url: width: bennani_video.width
+                          | image_tag: sizes: '(max-width: 699px) 100vw, 50vw', widths: '400,600,800,1000,1200'
+                        }}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          {% assign section_dm_title = section.settings.discover_more_title %}
+          {% assign section_dm_subtitle = section.settings.discover_more_subtitle %}
+          {% assign dm_title = entry.main_title | default: section_dm_title | default: tab_name %}
+          {% assign dm_subtitle = entry.subtitle | default: section_dm_subtitle %}
+          {% assign dm_num1 = entry.top_number_1 %}
+          {% assign dm_num2 = entry.top_number_2 %}
+          <div class="ew-discover-more-section">
+            <div class="container">
+              <div class="ew-header-section">
+                {% if dm_title %}
+                  <div class="ew-main-title">{{ dm_title }}</div>
+                {% endif %}
+                {% if dm_subtitle %}
+                  <div class="ew-subtitle">{{ dm_subtitle }}</div>
+                {% endif %}
+                {% assign year_text = section.settings.year_text | default: '2025' %}
+                {% if year_text %}
+                  {% assign year_parts = year_text | split: ',' %}
+                  {% if year_parts.size == 2 %}
+                    <div class="ew-year-text">
+                      <span class="ew-year-top">{{ year_parts[0] }}</span>
+                      <span class="ew-year-bottom">{{ year_parts[1] }}</span>
+                    </div>
+                  {% else %}
+                    {% assign year_length = year_text.size %}
+                    {% if year_length == 4 %}
+                      <div class="ew-year-text">
+                        <span class="ew-year-top">{{ year_text | slice: 0, 2 }}</span>
+                        <span class="ew-year-bottom">{{ year_text | slice: 2, 2 }}</span>
+                      </div>
+                    {% else %}
+                      <div class="ew-year-text">{{ year_text }}</div>
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+                <div class="ew-top-numbers">
+                  {% if dm_num1 %}
+                    <div class="ew-number-1">{{ dm_num1 }}</div>
+                  {% endif %}
+                  {% if dm_num2 %}
+                    <div class="ew-number-2">{{ dm_num2 }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="ew-arrows-wrapper">
+                {% assign meta_arrow_1 = entry.arrow_1 %}
+                {% assign meta_arrow_2 = entry.arrow_2 %}
+                {% assign meta_arrow_3 = entry.arrow_3 %}
+                {% assign meta_arrow_4 = entry.arrow_4 %}
+                {% assign section_arrow_1 = section.settings.arrow_image_1 %}
+                {% assign section_arrow_2 = section.settings.arrow_image_2 %}
+                {% assign section_arrow_3 = section.settings.arrow_image_3 %}
+                {% assign section_arrow_4 = section.settings.arrow_image_4 %}
+                {% assign arrow_1 = meta_arrow_1 | default: section_arrow_1 %}
+                {% assign arrow_2 = meta_arrow_2 | default: section_arrow_2 %}
+                {% assign arrow_3 = meta_arrow_3 | default: section_arrow_3 %}
+                {% assign arrow_4 = meta_arrow_4 | default: section_arrow_4 %}
+                {% if arrow_1 %}
+                  <div class="ew-arrow ew-arrow-1">
+                    {{ arrow_1 | image_url: width: 200 | image_tag: loading: 'lazy', class: 'ew-arrow-img' }}
+                  </div>
+                {% endif %}
+                {% if arrow_2 %}
+                  <div class="ew-arrow ew-arrow-2">
+                    {{ arrow_2 | image_url: width: 200 | image_tag: loading: 'lazy', class: 'ew-arrow-img' }}
+                  </div>
+                {% endif %}
+                {% if arrow_3 %}
+                  <div class="ew-arrow ew-arrow-3">
+                    {{ arrow_3 | image_url: width: 200 | image_tag: loading: 'lazy', class: 'ew-arrow-img' }}
+                  </div>
+                {% endif %}
+                {% if arrow_4 %}
+                  <div class="ew-arrow ew-arrow-4">
+                    {{ arrow_4 | image_url: width: 200 | image_tag: loading: 'lazy', class: 'ew-arrow-img' }}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="ew-content-blocks">
+                {% for i in (1..4) %}
+                  {% assign imgf = 'block' | append: i | append: '_image' %}
+                  {% assign titf = 'block' | append: i | append: '_title' %}
+                  {% assign linkf = 'block' | append: i | append: '_link' %}
+                  {% assign bimg = entry[imgf] %}
+                  {% assign btitle = entry[titf] %}
+                  {% assign blink = entry[linkf] %}
+                  {% if i == 1 %}
+                    {% assign bimg = entry.block1_image | default: section.settings.block1_image %}
+                    {% assign btitle = entry.block1_title | default: section.settings.block1_title %}
+                    {% assign blink = entry.block1_link | default: section.settings.block1_link %}
+                  {% elsif i == 2 %}
+                    {% assign bimg = entry.block2_image | default: section.settings.block2_image %}
+                    {% assign btitle = entry.block2_title | default: section.settings.block2_title %}
+                    {% assign blink = entry.block2_link | default: section.settings.block2_link %}
+                  {% elsif i == 3 %}
+                    {% assign bimg = entry.block3_image | default: section.settings.block3_image %}
+                    {% assign btitle = entry.block3_title | default: section.settings.block3_title %}
+                    {% assign blink = entry.block3_link | default: section.settings.block3_link %}
+                  {% elsif i == 4 %}
+                    {% assign bimg = entry.block4_image | default: section.settings.block4_image %}
+                    {% assign btitle = entry.block4_title | default: section.settings.block4_title %}
+                    {% assign blink = entry.block4_link | default: section.settings.block4_link %}
+                  {% endif %}
+                  <a
+                    {% if blink %}
+                      href="{{ blink }}"
+                    {% endif %}
+                    class="ew-block ew-block-{{ i }}"
+                    {% if bimg %}
+                      style="background-image:url('{{ bimg | image_url: width: 800 }}');"
+                    {% endif %}
+                  >
+                    {% if btitle %}
+                      <div class="ew-block-button button">{{ btitle }}</div>
+                    {% endif %}
+                  </a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </section>
 
 <style>
-  .ew-scroll-links-section {
-    font-family: 'Josefin Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    position: absolute;
-    top: 4rem;
-    left: 0;
-    right: 0;
-    z-index: 99;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
+  .header * {
+    color: #fff;
+  } 
+  .ew-discover-more-section {
+    background: #f4f4f4;
+    padding: 60px 0;
+  }
+  .ew-bennani-presets-section {
+    padding: 40px 0;
+  }
+  .ew-model-slide__button {
+    text-transform: uppercase;
+    font-size: 10px;
+    text-align: center;
+    margin-top: 6px;
+    font-weight: 400;
+    display: block;
+    text-decoration: underline;
+  }
 
+  .ew-model-slider__title {
+    text-align: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+  .ew-model-slide {
+    padding: 0 !important;
+  }
+  .ew-model-slide__title {
+    text-transform: uppercase;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 16px;
+    font-weight: 400;
+  }
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: transparent;
+  }
+  .header.is-solid {
+    background-color: #fff;
+  }
+  .header.is-solid * {
+    color: #000;
+  } 
+  .ew-scroll-links-section {
+    position: relative;
+  }
+
+  .ew-scroll-links__wrapper {
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
+  .ew-hero-banner-tab {
+    margin-top: 0 !important;
+  }
   .ew-scroll-links__heading {
     font-size: 32px;
     font-weight: 700;
@@ -39,13 +588,6 @@
     letter-spacing: 0;
     text-transform: none;
     line-height: 1.2;
-  }
-
-  .ew-scroll-links__wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
   }
 
   .ew-scroll-links__container {
@@ -78,6 +620,9 @@
     transition: all 0.3s ease;
     border-bottom: 2px solid transparent;
     white-space: nowrap;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
   }
   /* Light theme - dark text */
   .ew-scroll-links__item {
@@ -88,12 +633,16 @@
     border-bottom: 2px solid #fff;
   }
 
+  .ew-scroll-links__item.is-active {
+    border-bottom-color: #fff;
+  }
+
   /* Dark theme - light text */
-  .ew-scroll-links-section[data-theme="dark"] .ew-scroll-links__item {
+  .ew-scroll-links-section[data-theme='dark'] .ew-scroll-links__item {
     color: #fff;
   }
 
-  .ew-scroll-links-section[data-theme="dark"] .ew-scroll-links__item:hover {
+  .ew-scroll-links-section[data-theme='dark'] .ew-scroll-links__item:hover {
     color: #ccc;
   }
 
@@ -102,18 +651,18 @@
     .ew-scroll-links-section {
       padding: 0px 0;
     }
-    
+
     .ew-scroll-links__heading {
       font-size: 28px;
       margin-bottom: 25px;
     }
-    
+
     .ew-scroll-links__container {
       gap: 20px;
       padding: 10px 15px;
       max-width: calc(3 * 150px + 2 * 20px); /* 3 items + 2 gaps */
     }
-    
+
     .ew-scroll-links__item {
       flex: 0 0 150px; /* Fixed width for 3 items on tablet */
       padding: 8px 15px;
@@ -122,18 +671,17 @@
   }
 
   @media (max-width: 768px) {
-    
     .ew-scroll-links__heading {
       font-size: 24px;
       margin-bottom: 20px;
     }
-    
+
     .ew-scroll-links__container {
       gap: 15px;
       padding: 10px 10px;
       max-width: calc(3 * 120px + 2 * 15px); /* 3 items + 2 gaps */
     }
-    
+
     .ew-scroll-links__item {
       flex: 0 0 120px; /* Fixed width for 3 items on mobile */
       padding: 8px 12px;
@@ -142,18 +690,364 @@
   }
 
   @media (max-width: 480px) {
-    
     .ew-scroll-links__heading {
       font-size: 20px;
     }
-    
+
     .ew-scroll-links__item {
       padding: 12px 15px;
       font-size: 13px;
     }
   }
+
+  .ew-tab-panel__title {
+    font-size: 20px;
+    margin: 0 0 8px 0;
+  }
+
+  .ew-tab-panel[hidden] {
+    display: none !important;
+  }
+
+  .ew-tab-panel__image {
+    margin-top: 12px;
+  }
+  .ew-tab-panel__video {
+    margin-top: 12px;
+  }
+  .ew-tab-panel__products {
+    margin-top: 16px;
+  }
+
+  /* Discover more minimal grid (reuse existing classnames) */
+  .ew-discover-more-section .ew-header-section {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .ew-discover-more-section .ew-main-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #031f38;
+    margin-bottom: 6px;
+  }
+  .ew-discover-more-section .ew-subtitle {
+    font-size: 16px;
+    color: #031f38;
+  }
+  .ew-discover-more-section .ew-year-text {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 48px;
+    font-weight: 700;
+    color: #999999;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    letter-spacing: 0;
+  }
+  .ew-discover-more-section .ew-year-top, .ew-discover-more-section .ew-year-bottom {
+    font-weight: 400;
+    display: block;
+    line-height: 1;
+    font-size: 18px;
+    color: #031f38;
+}
+  .ew-discover-more-section .ew-arrows-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    align-items: center;
+  }
+  .ew-discover-more-section .ew-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ew-discover-more-section .ew-arrow-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+  @media (max-width: 768px) {
+    .ew-discover-more-section .ew-arrows-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .ew-discover-more-section .ew-year-text {
+      font-size: 36px;
+    }
+  }
+  @media (max-width: 480px) {
+    .ew-discover-more-section .ew-arrows-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .ew-discover-more-section .ew-year-text {
+      font-size: 28px;
+    }
+  }
+  .ew-discover-more-section .ew-content-blocks {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .ew-discover-more-section .ew-block {
+    background-size: cover;
+    background-position: center;
+    padding-top: 120%;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .ew-discover-more-section .ew-block-button {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    padding: 6px 18px;
+    font-size: 12px;
+  }
+  @media (max-width: 768px) {
+    .ew-discover-more-section .ew-content-blocks {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .ew-discover-more-section .ew-content-blocks {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Simple slideshow */
+  .ew-simple-slideshow {
+    position: relative;
+    overflow: hidden;
+  }
+  .ew-simple-slideshow__track {
+    display: flex;
+    transition: transform 0.35s ease;
+  }
+  .ew-simple-slideshow__slide {
+    min-width: 100%;
+  }
+  .ew-simple-slideshow__nav {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+  .ew-simple-slideshow__nav button {
+    pointer-events: all;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    border: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    display: grid;
+    place-items: center;
+  }
+
+  /* Video wrapper with mute button */
+  .ew-video-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  .ew-video-wrapper video,
+  .ew-video-wrapper video-media {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .ew-video-mute-btn {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    color: #ffffff;
+    padding: 0;
+  }
+  .ew-video-mute-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+  }
+  .ew-video-mute-btn svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+  @media (max-width: 768px) {
+    .ew-video-mute-btn {
+      width: 40px;
+      height: 40px;
+      bottom: 12px;
+      right: 12px;
+    }
+    .ew-video-mute-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* Hero banner tab layout */
+  .ew-hero-banner-tab {
+    margin-top: 20px;
+  }
+  .ew-hero-banner {
+    width: 100%;
+    position: relative;
+  }
+  .ew-hero-banner__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .ew-hero-banner__button-wrapper a {
+    padding: 8px 20px;
+      font-size: 10px;
+      line-height: normal;
+}
+  .ew-hero-banner__button-wrapper {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+  @media (max-width: 768px) {
+    .ew-hero-banner__button-wrapper {
+      bottom: 1.5rem;
+    }
+    .ew-hero-banner__button {
+      padding: 12px 24px;
+      font-size: 13px;
+    }
+  }
+  .ew-bennani-video {
+    margin: 20px 0;
+  }
+  .ew-collection-products {
+    margin: 20px 0;
+  }
+  .ew-collection-title {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .ew-product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .ew-social-images {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .ew-social-img {
+    flex: 1;
+    min-width: 150px;
+    max-width: 250px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .ew-debug {
+    margin-top: 16px;
+  }
+  .ew-debug-json {
+    white-space: pre-wrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 12px;
+    background: #f6f8fa;
+    padding: 12px;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 1024px) {
+    .ew-model-slider__inner {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .ew-model-slider__slider-wrap {
+      padding: 40px 0;
+    }
+  }
 </style>
-{% endif %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var container =
+      document.currentScript &&
+      document.currentScript.previousElementSibling &&
+      document.currentScript.previousElementSibling.previousElementSibling
+        ? document.currentScript.previousElementSibling.previousElementSibling
+        : null;
+    // Fallback: find within this section by ID
+    var sectionEl =
+      document.getElementById('ew-scroll-links-{{ section.id }}') ||
+      document.currentScript.closest('section') ||
+      document.querySelector('[data-section-id="{{ section.id }}"]') ||
+      document.querySelector('.ew-scroll-links-section');
+    if (!sectionEl) return;
+
+    var tabList = sectionEl.querySelector('.ew-scroll-links__container');
+    var tabs = tabList ? Array.prototype.slice.call(tabList.querySelectorAll('.ew-scroll-links__item')) : [];
+    var panels = Array.prototype.slice.call(sectionEl.querySelectorAll('.ew-tab-panel'));
+
+    function handleize(str) {
+      if (!str) return '';
+      return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
+    
+    function activate(targetId) {
+      tabs.forEach(function (t) {
+        t.classList.toggle('is-active', t.getAttribute('data-tab-target') === targetId);
+      });
+      panels.forEach(function (p) {
+        p.hidden = p.id !== targetId;
+      });
+      var activePanel = document.getElementById(targetId);
+      if (activePanel) {
+        var themeMode = activePanel.getAttribute('data-theme-mode');
+        if (themeMode) {
+          var handleizedTheme = handleize(themeMode);
+          document.body.setAttribute('data-theme-mode', handleizedTheme);
+        }
+      }
+    }
+
+    tabs.forEach(function (tab, index) {
+      tab.addEventListener('click', function () {
+        activate(tab.getAttribute('data-tab-target'));
+      });
+    });
+
+    if (tabs.length && panels.length) {
+      activate(tabs[0].getAttribute('data-tab-target'));
+    }
+  });
+</script>
 
 {% schema %}
 {
@@ -163,74 +1057,145 @@
   "settings": [
     {
       "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Navigation Links"
+      "id": "metaobject_definition_handle",
+      "label": "Metaobject definition handle (namespace_type)",
+      "default": "shop_collection",
+      "info": "Example: shop_collection."
     },
     {
-      "type": "select",
-      "id": "theme",
-      "label": "Button Theme",
-      "options": [
-        {
-          "value": "light",
-          "label": "Light Background (Dark Buttons)"
-        },
-        {
-          "value": "dark",
-          "label": "Dark Background (Light Buttons)"
-        }
-      ],
-      "default": "light",
-      "info": "Choose the theme based on your background color"
-    }
-  ],
-  "blocks": [
+      "type": "header",
+      "content": "Discover More Section"
+    },
     {
-      "type": "scroll_link",
-      "name": "Scroll Link",
-      "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Link Text",
-          "default": "LINK TEXT"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link URL",
-          "info": "URL for the link"
-        }
-      ]
+      "type": "text",
+      "id": "discover_more_title",
+      "label": "Discover More Title",
+      "default": "Discover More",
+      "info": "Used if metaobject doesn't have main_title"
+    },
+    {
+      "type": "text",
+      "id": "discover_more_subtitle",
+      "label": "Discover More Subtitle",
+      "default": "Sit Down Relax and Enjoy",
+      "info": "Used if metaobject doesn't have subtitle"
+    },
+    {
+      "type": "text",
+      "id": "year_text",
+      "label": "Year Text (top right)",
+      "default": "2025",
+      "info": "Year text displayed in top right. Enter '2025' (auto-splits to 20/25) or '20,25' for stacked display"
+    },
+    {
+      "type": "header",
+      "content": "Arrow Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "arrow_image_1",
+      "label": "Arrow 1 (points to Block 1)"
+    },
+    {
+      "type": "image_picker",
+      "id": "arrow_image_2",
+      "label": "Arrow 2 (points to Block 2)"
+    },
+    {
+      "type": "image_picker",
+      "id": "arrow_image_3",
+      "label": "Arrow 3 (points to Block 3)"
+    },
+    {
+      "type": "image_picker",
+      "id": "arrow_image_4",
+      "label": "Arrow 4 (points to Block 4)"
+    },
+    {
+      "type": "header",
+      "content": "Discover More Blocks"
+    },
+    {
+      "type": "image_picker",
+      "id": "block1_image",
+      "label": "Block 1 Image",
+      "info": "Used if metaobject doesn't have block1_image"
+    },
+    {
+      "type": "text",
+      "id": "block1_title",
+      "label": "Block 1 Title",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "url",
+      "id": "block1_link",
+      "label": "Block 1 Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "block2_image",
+      "label": "Block 2 Image",
+      "info": "Used if metaobject doesn't have block2_image"
+    },
+    {
+      "type": "text",
+      "id": "block2_title",
+      "label": "Block 2 Title",
+      "default": "FOUNDATION"
+    },
+    {
+      "type": "url",
+      "id": "block2_link",
+      "label": "Block 2 Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "block3_image",
+      "label": "Block 3 Image",
+      "info": "Used if metaobject doesn't have block3_image"
+    },
+    {
+      "type": "text",
+      "id": "block3_title",
+      "label": "Block 3 Title",
+      "default": "SOCIAL MEDIA"
+    },
+    {
+      "type": "url",
+      "id": "block3_link",
+      "label": "Block 3 Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "block4_image",
+      "label": "Block 4 Image",
+      "info": "Used if metaobject doesn't have block4_image"
+    },
+    {
+      "type": "text",
+      "id": "block4_title",
+      "label": "Block 4 Title",
+      "default": "DELIVERY"
+    },
+    {
+      "type": "url",
+      "id": "block4_link",
+      "label": "Block 4 Link"
     }
   ],
   "presets": [
     {
       "name": "EW Scroll Links",
-      "blocks": [
-        {
-          "type": "scroll_link",
-          "settings": {
-            "text": "INITILES",
-            "link": "#"
-          }
-        },
-        {
-          "type": "scroll_link",
-          "settings": {
-            "text": "MEMBERS CLUB",
-            "link": "#"
-          }
-        },
-        {
-          "type": "scroll_link",
-          "settings": {
-            "text": "ATLAS",
-            "link": "#"
-          }
-        }
-      ]
+      "settings": {
+        "metaobject_definition_handle": "shop_collection",
+        "discover_more_title": "Discover More",
+        "discover_more_subtitle": "Sit Down Relax and Enjoy",
+        "block1_title": "OUR STORY",
+        "block2_title": "FOUNDATION",
+        "block3_title": "SOCIAL MEDIA",
+        "block4_title": "DELIVERY"
+      }
     }
   ]
 }
