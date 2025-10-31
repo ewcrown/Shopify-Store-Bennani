@@ -3,42 +3,54 @@
     {% if section.settings.heading != blank %}
       <h2 class="ew-impact__heading">{{ section.settings.heading }}</h2>
     {% endif %}
-    
+
     {% if section.settings.subheading != blank %}
       <p class="ew-impact__subheading">{{ section.settings.subheading }}</p>
     {% endif %}
-    
+
     <div class="ew-impact__grid">
       <div class="ew-impact__column">
         {% for block in section.blocks limit: 4 %}
           <a href="{{ block.settings.link | default: '#' }}" class="ew-impact__item" {{ block.shopify_attributes }}>
             {% if block.settings.image %}
               <div class="ew-impact__image-wrapper">
-                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'ew-impact__image', width: 600, height: 600 }}
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag: loading: 'lazy', class: 'ew-impact__image', width: 600, height: 600
+                }}
               </div>
             {% endif %}
           </a>
         {% endfor %}
       </div>
-      
+
       <div class="ew-impact__column">
         {% for block in section.blocks offset: 4 limit: 4 %}
           <a href="{{ block.settings.link | default: '#' }}" class="ew-impact__item" {{ block.shopify_attributes }}>
             {% if block.settings.image %}
               <div class="ew-impact__image-wrapper">
-                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'ew-impact__image', width: 600, height: 600 }}
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag: loading: 'lazy', class: 'ew-impact__image', width: 600, height: 600
+                }}
               </div>
             {% endif %}
           </a>
         {% endfor %}
       </div>
-      
+
       <div class="ew-impact__column">
         {% for block in section.blocks offset: 8 limit: 4 %}
           <a href="{{ block.settings.link | default: '#' }}" class="ew-impact__item" {{ block.shopify_attributes }}>
             {% if block.settings.image %}
               <div class="ew-impact__image-wrapper">
-                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'ew-impact__image', width: 600, height: 600 }}
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag: loading: 'lazy', class: 'ew-impact__image', width: 600, height: 600
+                }}
               </div>
             {% endif %}
           </a>
@@ -104,7 +116,6 @@
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s ease;
-    aspect-ratio: 1;
   }
 
   /* First wrapper specific positioning */
@@ -129,6 +140,7 @@
   }
 
   /* Second wrapper specific positioning */
+
   .ew-impact__column:nth-child(2) .ew-impact__item:nth-child(1) {
     grid-column: 1 / 4;
     grid-row: 1;
@@ -143,10 +155,28 @@
     grid-column: 1 / 5;
     grid-row: 2;
   }
-  
+
   .ew-impact__column:nth-child(2) .ew-impact__item:nth-child(4) {
     grid-column: 5 / 7;
     grid-row: 2;
+  }
+
+  .ew-impact__column:nth-child(3) .ew-impact__item:nth-child(2),
+  .ew-impact__column:nth-child(3) .ew-impact__item:nth-child(1),
+  .ew-impact__column:nth-child(2) .ew-impact__item:nth-child(3),
+  .ew-impact__column:nth-child(2) .ew-impact__item:nth-child(4),
+  .ew-impact__column:first-child .ew-impact__item:nth-child(1),
+  .ew-impact__column:first-child .ew-impact__item:nth-child(2) {
+    height: 150px;
+  }
+
+  .ew-impact__column:nth-child(3) .ew-impact__item:nth-child(3),
+  .ew-impact__column:nth-child(3) .ew-impact__item:nth-child(4),
+  .ew-impact__column:nth-child(2) .ew-impact__item:nth-child(2),
+  .ew-impact__column:nth-child(2) .ew-impact__item:nth-child(1),
+  .ew-impact__column:first-child .ew-impact__item:nth-child(3),
+  .ew-impact__column:first-child .ew-impact__item:nth-child(4) {
+    height: 250px;
   }
 
   /* Third wrapper specific positioning (same as first wrapper) */
@@ -178,14 +208,19 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    position: relative;
+    background-color: #f0f0f0;
   }
 
   .ew-impact__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
     transition: transform 0.3s ease;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .ew-impact__item:hover .ew-impact__image {
@@ -197,7 +232,7 @@
     .ew-impact__grid {
       gap: 20px;
     }
-    
+
     .ew-impact__column {
       gap: 20px;
     }
@@ -207,15 +242,15 @@
     .ew-impact-grid-section {
       padding: 50px 0;
     }
-    
+
     .ew-impact__subheading {
       margin-bottom: 50px;
     }
-    
+
     .ew-impact__grid {
       gap: 15px;
     }
-    
+
     .ew-impact__column {
       gap: 15px;
     }
@@ -225,21 +260,21 @@
     .ew-impact-grid-section {
       padding: 40px 0;
     }
-    
+
     .ew-impact__heading {
       font-size: 28px;
     }
-    
+
     .ew-impact__subheading {
       font-size: 16px;
       margin-bottom: 40px;
     }
-    
+
     .ew-impact__grid {
       flex-direction: column;
       gap: 10px;
     }
-    
+
     .ew-impact__column {
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
@@ -267,7 +302,7 @@
     .ew-impact__grid {
       gap: 8px;
     }
-    
+
     .ew-impact__column {
       grid-template-columns: repeat(2, 1fr);
       gap: 8px;
@@ -278,20 +313,20 @@
     .ew-impact-grid-section {
       padding: 30px 0;
     }
-    
+
     .ew-impact__heading {
       font-size: 24px;
     }
-    
+
     .ew-impact__subheading {
       font-size: 14px;
       margin-bottom: 30px;
     }
-    
+
     .ew-impact__grid {
       gap: 5px;
     }
-    
+
     .ew-impact__column {
       grid-template-columns: repeat(2, 1fr);
       gap: 5px;
@@ -302,7 +337,7 @@
     .ew-impact__grid {
       gap: 3px;
     }
-    
+
     .ew-impact__column {
       gap: 3px;
     }

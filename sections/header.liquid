@@ -13,9 +13,43 @@
     z-index: 4;
   }
 
+  #shopify-section-{{ section.id }} .header {
+    display: block;
+    grid: none;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+  }
+
+  #shopify-section-{{ section.id }} .header .container {
+    grid: var(--header-grid);
+    align-items: center;
+    justify-content: center;
+    column-gap: 1.25rem;
+    row-gap: var(--header-padding-block);
+    width: 100%;
+    max-width: 100%;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    display: grid;
+  }
+
+  #shopify-section-{{ section.id }} .header__primary-nav-item {
+    position: static;
+  }
+
+  #shopify-section-{{ section.id }} .mega-menu {
+    inset-inline-start: 50% !important;
+    transform: translateX(-50%);
+    width: 100vw;
+    max-width: 100vw;
+  }
+
   @media screen and (min-width: 700px) {
     #shopify-section-{{ section.id }} {
       --header-padding-block: {% if section.settings.reduce_padding %}1.2rem{% else %}1.6rem{% endif %};
+    }
+    #shopify-section-{{ section.id }} .header .container {
+      column-gap: 2.5rem;
     }
   }
 
@@ -60,11 +94,12 @@
 
 <height-observer variable="header">
   <x-header {% if section.settings.hide_on_scroll and section.settings.enable_sticky %}hide-on-scroll{% endif %} class="header color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
-    {%- comment -%}
-    --------------------------------------------------------------------------------------------------------------------
-    LOGO AREA
-    --------------------------------------------------------------------------------------------------------------------
-    {%- endcomment -%}
+    <div class="container">
+      {%- comment -%}
+      --------------------------------------------------------------------------------------------------------------------
+      LOGO AREA
+      --------------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
 
     {%- capture logo_content -%}
       {%- if section.settings.logo -%}
@@ -285,6 +320,8 @@
     {%- endif -%}
 
     {%- assign sidebar_menu = section.settings.sidebar_menu | default: section.settings.menu -%}
+
+    </div>
 
     {%- if sidebar_menu.links.size > 0 -%}
       {%- render 'header-sidebar', menu: sidebar_menu, color_scheme: section.settings.sidebar_color_scheme, show_dividers: section.settings.sidebar_show_dividers, open_second_level_menus: section.settings.sidebar_open_second_level_menus -%}

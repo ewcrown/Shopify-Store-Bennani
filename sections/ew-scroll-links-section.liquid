@@ -70,7 +70,13 @@
                 {% endif %}
                 {% if hero_button_text and hero_button_link %}
                   <div class="ew-hero-banner__button-wrapper">
-                    <a href="{{ hero_button_link }}" class="button" style="--button-background: 255 255 255;--button-outline-color: 255 255 255;--button-text-color: 3 31 56;">{{ hero_button_text }}</a>
+                    <a
+                      href="{{ hero_button_link }}"
+                      class="button"
+                      style="--button-background: 255 255 255;--button-outline-color: 255 255 255;--button-text-color: 3 31 56;"
+                    >
+                      {{- hero_button_text -}}
+                    </a>
                   </div>
                 {% endif %}
               </div>
@@ -514,9 +520,15 @@
 </section>
 
 <style>
+  body[data-theme-mode='dark'] .ew-discover-more-section .ew-main-title {
+    color: #000 !important;
+  }
+  body[data-theme-mode='dark'] .custom-footer {
+    background: #000 !important;
+  }
   .header * {
     color: #fff;
-  } 
+  }
   .ew-discover-more-section {
     background: #f4f4f4;
     padding: 60px 0;
@@ -564,7 +576,7 @@
   }
   .header.is-solid * {
     color: #000;
-  } 
+  }
   .ew-scroll-links-section {
     position: relative;
   }
@@ -748,13 +760,14 @@
     align-items: center;
     letter-spacing: 0;
   }
-  .ew-discover-more-section .ew-year-top, .ew-discover-more-section .ew-year-bottom {
+  .ew-discover-more-section .ew-year-top,
+  .ew-discover-more-section .ew-year-bottom {
     font-weight: 400;
     display: block;
     line-height: 1;
     font-size: 18px;
     color: #031f38;
-}
+  }
   .ew-discover-more-section .ew-arrows-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -871,12 +884,11 @@
   .ew-video-mute-btn {
     position: absolute;
     bottom: 16px;
-    right: 16px;
-    background: rgba(0, 0, 0, 0.6);
+    left: 16px;
     border: none;
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -885,7 +897,7 @@
     transition: all 0.3s ease;
     color: #ffffff;
     padding: 0;
-  }
+}
   .ew-video-mute-btn:hover {
     background: rgba(0, 0, 0, 0.8);
     transform: scale(1.1);
@@ -923,9 +935,9 @@
   }
   .ew-hero-banner__button-wrapper a {
     padding: 8px 20px;
-      font-size: 10px;
-      line-height: normal;
-}
+    font-size: 10px;
+    line-height: normal;
+  }
   .ew-hero-banner__button-wrapper {
     position: absolute;
     bottom: 2rem;
@@ -1017,9 +1029,13 @@
 
     function handleize(str) {
       if (!str) return '';
-      return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      return str
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
     }
-    
+
     function activate(targetId) {
       tabs.forEach(function (t) {
         t.classList.toggle('is-active', t.getAttribute('data-tab-target') === targetId);
