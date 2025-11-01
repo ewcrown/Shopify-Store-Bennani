@@ -39,7 +39,7 @@
         "enable_sticky": true,
         "hide_on_scroll": false,
         "show_separation_border": false,
-        "reduce_padding": false,
+        "reduce_padding": true,
         "logo": "shopify://shop_images/Copy_of_BENNANI_NAME_OFFICIAL.png",
         "logo_max_width": 90,
         "logo_mobile_max_width": 90,
@@ -58,7 +58,9 @@
         "show_country_name": false,
         "show_country_flag": false,
         "show_locale_selector": false,
-        "transparent_header_text_color": "#ffffff"
+        "transparent_header_text_color": "#ffffff",
+        "transparent_logo": "shopify://shop_images/Copy_of_BENNANI_NAME_OFFICIAL_vectorized_-_Copy.png",
+        "dark_logo": "shopify://shop_images/dark_logo.png"
       }
     }
   },

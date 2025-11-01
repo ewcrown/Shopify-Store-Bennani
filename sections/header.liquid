@@ -20,7 +20,7 @@
     padding-inline-end: 0;
   }
 
-  #shopify-section-{{ section.id }} .header .container {
+  #shopify-section-{{ section.id }} .header .container-inner {
     grid: var(--header-grid);
     align-items: center;
     justify-content: center;
@@ -57,7 +57,7 @@
     #shopify-section-{{ section.id }} {
       --header-padding-block: {% if section.settings.reduce_padding %}1.2rem{% else %}1.6rem{% endif %};
     }
-    #shopify-section-{{ section.id }} .header .container {
+    #shopify-section-{{ section.id }} .header .container-inner {
       column-gap: 2.5rem;
     }
   }
@@ -104,6 +104,7 @@
 <height-observer variable="header">
   <x-header {% if section.settings.hide_on_scroll and section.settings.enable_sticky %}hide-on-scroll{% endif %} class="header color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
     <div class="container">
+        <div class="container-inner">
       {%- comment -%}
       --------------------------------------------------------------------------------------------------------------------
       LOGO AREA
@@ -117,10 +118,14 @@
 
         <span class="sr-only">{{ shop.name }}</span>
         {%- assign alt_text = section.settings.logo.alt | default: shop.name -%}
-        {{- section.settings.logo | image_url: width: section.settings.logo.width | image_tag: sizes: sizes, alt: alt_text, widths: widths, class: 'header__logo-image' -}}
+        {{- section.settings.logo | image_url: width: section.settings.logo.width | image_tag: sizes: sizes, alt: alt_text, widths: widths, class: 'header__logo-image header__logo-image--white' -}}
 
         {%- if section.settings.transparent_logo -%}
           {{- section.settings.transparent_logo | image_url: width: section.settings.transparent_logo.width | image_tag: sizes: sizes, widths: widths, class: 'header__logo-image header__logo-image--transparent' -}}
+        {%- endif -%}
+
+        {%- if section.settings.dark_logo -%}
+          {{- section.settings.dark_logo | image_url: width: section.settings.dark_logo.width | image_tag: sizes: sizes, alt: alt_text, widths: widths, class: 'header__logo-image header__logo-image--dark' -}}
         {%- endif -%}
       {%- else -%}
         <span class="header__logo-text h5">{{ shop.name }}</span>
@@ -330,6 +335,7 @@
 
     {%- assign sidebar_menu = section.settings.sidebar_menu | default: section.settings.menu -%}
 
+    </div>
     </div>
 
     {%- if sidebar_menu.links.size > 0 -%}
@@ -593,6 +599,12 @@
       "id": "transparent_logo",
       "label": "t:sections.header.transparent_header_logo_image",
       "info": "t:sections.header.transparent_header_logo_size_recommendation"
+    },
+    {
+      "type": "image_picker",
+      "id": "dark_logo",
+      "label": "Dark logo (for sticky/hover states)",
+      "info": "Optional: Shows on hover or when header is sticky/solid"
     }
   ],
   "blocks": [

@@ -97,7 +97,7 @@
             {% endif %}
             {% if ms_model_image or ms_collection %}
               <div class="ew-model-slider__inner-wrap">
-                <div class="container">
+  <div class="container">
                   <div class="ew-model-slider__inner">
                     <div class="ew-model-slider__model-wrap">
                       <div class="ew-model-slider__model">
@@ -277,8 +277,8 @@
                   document.addEventListener('DOMContentLoaded', init);
                 })();
               </script>
-            {% endif %}
-
+    {% endif %}
+    
             {% if bennani_video %}
               {% assign mt_media_type = bennani_video.media_type | default: 'image' %}
               {% assign mt_button_text = entry.button_text %}
@@ -508,10 +508,10 @@
                     {% if btitle %}
                       <div class="ew-block-button button">{{ btitle }}</div>
                     {% endif %}
-                  </a>
-                {% endfor %}
-              </div>
-            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
           </div>
         </div>
       </div>
@@ -577,8 +577,10 @@
     width: 100%;
     z-index: 1;
     background-color: transparent;
-    padding: 10px 0;
   }
+  .ew-bennani-presets-section .image-with-text {
+  gap:20px;
+}
   .header.is-solid {
     background-color: #fff;
   }
@@ -686,18 +688,18 @@
     .ew-scroll-links-section {
       padding: 0px 0;
     }
-
+    
     .ew-scroll-links__heading {
       font-size: 28px;
       margin-bottom: 25px;
     }
-
+    
     .ew-scroll-links__container {
       gap: 20px;
       padding: 10px 15px;
       max-width: calc(3 * 150px + 2 * 20px); /* 3 items + 2 gaps */
     }
-
+    
     .ew-scroll-links__item {
       flex: 0 0 150px; /* Fixed width for 3 items on tablet */
       padding: 8px 15px;
@@ -706,17 +708,23 @@
   }
 
   @media (max-width: 768px) {
+    .ew-discover-more-section {
+      padding: 30px 0;
+  }
+  .ew-scroll-links__wrapper {
+    top: 3rem;
+  }
     .ew-scroll-links__heading {
       font-size: 24px;
       margin-bottom: 20px;
     }
-
+    
     .ew-scroll-links__container {
       gap: 15px;
       padding: 10px 10px;
       max-width: calc(3 * 120px + 2 * 15px); /* 3 items + 2 gaps */
     }
-
+    
     .ew-scroll-links__item {
       flex: 0 0 120px; /* Fixed width for 3 items on mobile */
       padding: 8px 12px;
@@ -728,10 +736,10 @@
     .ew-scroll-links__heading {
       font-size: 20px;
     }
-
+    
     .ew-scroll-links__item {
-      padding: 12px 15px;
-      font-size: 13px;
+      padding: 6px 4px;
+      font-size: 10px;
     }
   }
 
@@ -1038,6 +1046,31 @@
       padding: 40px 0;
     }
   }
+
+  .header__logo-image--white {
+    opacity: 1 !important;
+    position: relative !important;
+  }
+  
+  .header__logo-image--dark {
+    opacity: 0 !important;
+    pointer-events: none;
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    transition: opacity .2s;
+  }
+  
+  .header:hover .header__logo-image--dark,
+  .header.is-solid .header__logo-image--dark,
+  .header:has(.is-solid) .header__logo-image--dark {
+    opacity: 1 !important;
+  }
+  
+  .header:hover .header__logo-image--white,
+  .header.is-solid .header__logo-image--white {
+    opacity: 0 !important;
+  }
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -1220,14 +1253,14 @@
       "label": "Block 4 Image",
       "info": "Used if metaobject doesn't have block4_image"
     },
-    {
-      "type": "text",
+        {
+          "type": "text",
       "id": "block4_title",
       "label": "Block 4 Title",
       "default": "DELIVERY"
-    },
-    {
-      "type": "url",
+        },
+        {
+          "type": "url",
       "id": "block4_link",
       "label": "Block 4 Link"
     }
@@ -1235,7 +1268,7 @@
   "presets": [
     {
       "name": "EW Scroll Links",
-      "settings": {
+          "settings": {
         "metaobject_definition_handle": "shop_collection",
         "discover_more_title": "Discover More",
         "discover_more_subtitle": "Sit Down Relax and Enjoy",
