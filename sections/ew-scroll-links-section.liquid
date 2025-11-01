@@ -30,7 +30,8 @@
       {% assign slug = entry.id | default: forloop.index %}
       {% assign tab_name = entry.tab_name %}
       {% assign bennani_video_title = entry.bennani_video_title %}
-      {% assign hero_banner = entry.hero_banner_media %}
+      {% assign hero_banner = entry.hero_banner_media.value %}
+      {% assign mobile_hero_banner = entry.mobile_hero_banner_media.value %}
       {% assign bennani_video = entry.bennani_media.value %}
       {% assign collection_link = entry.collection_link.value %}
       {% assign hero_button_text = 'shop now' %}
@@ -53,10 +54,88 @@
         <div class="ew-tab-panel__content">
           <div class="ew-hero-banner-tab">
             {% if hero_banner %}
-              <div class="ew-hero-banner">
+              <div class="ew-hero-banner ew-hero-banner--desktop">
                 {% assign hero_media_type = hero_banner.media_type | default: 'image' %}
                 {% if hero_media_type == 'video' or hero_media_type == 'external_video' %}
-                  {% render 'media', media: hero_banner, autoplay: false, loop: true, controls: true %}
+                  <div class="ew-video-wrapper" id="ew-hero-video-{{ section.id }}-{{ slug }}">
+                    {% render 'media', media: hero_banner, autoplay: true, loop: true, controls: false, muted: true %}
+                    <button
+                      class="ew-video-mute-btn"
+                      id="ew-hero-video-mute-{{ section.id }}-{{ slug }}"
+                      aria-label="Toggle mute"
+                      title="Toggle mute"
+                    >
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <script>
+                    (function () {
+                      var wrapper = document.getElementById('ew-hero-video-{{ section.id }}-{{ slug }}');
+                      var muteBtn = document.getElementById('ew-hero-video-mute-{{ section.id }}-{{ slug }}');
+                      if (!wrapper || !muteBtn) return;
+
+                      var video = wrapper.querySelector('video');
+                      var videoMedia = wrapper.querySelector('video-media');
+                      if (!video && !videoMedia) return;
+
+                      function updateMuteIcon(isMuted) {
+                        var svg = muteBtn.querySelector('svg');
+                        if (!svg) return;
+                        if (isMuted) {
+                          svg.innerHTML =
+                            '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" fill="currentColor"/>';
+                        } else {
+                          svg.innerHTML =
+                            '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>';
+                        }
+                      }
+
+                      function getActualVideo() {
+                        if (video) return video;
+                        if (videoMedia) {
+                          var actualVideo = videoMedia.querySelector('video');
+                          if (actualVideo) return actualVideo;
+                        }
+                        return null;
+                      }
+
+                      muteBtn.addEventListener('click', function () {
+                        var actualVideo = getActualVideo();
+                        if (actualVideo) {
+                          if (actualVideo.muted) {
+                            actualVideo.muted = false;
+                            updateMuteIcon(false);
+                          } else {
+                            actualVideo.muted = true;
+                            updateMuteIcon(true);
+                          }
+                        }
+                      });
+
+                      var actualVideo = getActualVideo();
+                      if (actualVideo) {
+                        actualVideo.addEventListener('loadedmetadata', function () {
+                          actualVideo.muted = true;
+                          updateMuteIcon(true);
+                        });
+
+                        if (actualVideo.readyState >= 2) {
+                          updateMuteIcon(actualVideo.muted);
+                        }
+
+                        actualVideo.muted = true;
+                        updateMuteIcon(true);
+                      }
+                    })();
+                  </script>
                 {% else %}
                   {{
                     hero_banner
@@ -67,6 +146,53 @@
                       widths: '1200,1600,2000,2400,3200',
                       class: 'ew-hero-banner__img'
                   }}
+                {% endif %}
+                {% if hero_button_text and hero_button_link %}
+                  <div class="ew-hero-banner__button-wrapper">
+                    <a
+                      href="{{ hero_button_link }}"
+                      class="button"
+                      style="--button-background: 255 255 255;--button-outline-color: 255 255 255;--button-text-color: 3 31 56;"
+                    >
+                      {{- hero_button_text -}}
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if mobile_hero_banner or hero_banner %}
+              <div class="ew-hero-banner ew-hero-banner--mobile">
+                {% if mobile_hero_banner %}
+                  {% assign mobile_hero_media_type = mobile_hero_banner.media_type | default: 'image' %}
+                  {% if mobile_hero_media_type == 'video' or mobile_hero_media_type == 'external_video' %}
+                    {% render 'media', media: mobile_hero_banner, autoplay: false, loop: true, controls: true %}
+                  {% else %}
+                    {{
+                      mobile_hero_banner
+                      | image_url: width: mobile_hero_banner.width
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: '100vw',
+                        widths: '600,800,1000,1200,1600',
+                        class: 'ew-hero-banner__img'
+                    }}
+                  {% endif %}
+                {% elsif hero_banner %}
+                  {% assign hero_media_type = hero_banner.media_type | default: 'image' %}
+                  {% if hero_media_type == 'video' or hero_media_type == 'external_video' %}
+                    {% render 'media', media: hero_banner, autoplay: false, loop: true, controls: true %}
+                  {% else %}
+                    {{
+                      hero_banner
+                      | image_url: width: hero_banner.width
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: '100vw',
+                        widths: '600,800,1000,1200,1600',
+                        class: 'ew-hero-banner__img'
+                    }}
+                  {% endif %}
                 {% endif %}
                 {% if hero_button_text and hero_button_link %}
                   <div class="ew-hero-banner__button-wrapper">
@@ -963,6 +1089,20 @@
   .ew-hero-banner {
     width: 100%;
     position: relative;
+  }
+  .ew-hero-banner--desktop {
+    display: block;
+  }
+  .ew-hero-banner--mobile {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .ew-hero-banner--desktop {
+      display: none;
+    }
+    .ew-hero-banner--mobile {
+      display: block;
+    }
   }
   .ew-hero-banner__img {
     width: 100%;
